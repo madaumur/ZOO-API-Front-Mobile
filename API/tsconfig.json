@@ -1,0 +1,21 @@
+{
+	"compilerOptions": {
+		"module": "commonjs",
+		"target": "ES2022",
+		"outDir": "dist/",
+
+		"strict": true,
+		"alwaysStrict": true,
+
+		"noImplicitAny": true,
+		"removeComments": true,
+		"preserveConstEnums": true,
+		"sourceMap": false,
+		"forceConsistentCasingInFileNames": true,
+
+		"esModuleInterop": true
+		//"importHelpers": true
+	},
+	"include": ["src/**/*"],
+	"exclude": ["node_modules"]
+}

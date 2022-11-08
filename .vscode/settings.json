@@ -1,0 +1,11 @@
+{
+    "eslint.alwaysShowStatus": true,
+    "eslint.format.enable": true,
+    "eslint.lintTask.enable": true,
+
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+    "liveServer.settings.port": 5502,
+    "compile-hero.disable-compile-files-on-did-save-code": false
+}
