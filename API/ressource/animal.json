@@ -1,0 +1,32 @@
+[
+	{
+		"_id": "drako",
+		"name": "Drako",
+		"specie": "kangourou",
+		"birth_date": "",
+		"death_date": "",
+		"sex": "M",
+		"observations": "",
+		"position": "dedans"
+	},
+	{
+		"_id": "eucalyptus",
+		"name": "Eucalyptus",
+		"specie": "koala",
+		"birth_date": "",
+		"death_date": "",
+		"sex": "M",
+		"observations": "",
+		"position": "dedans"
+	},
+	{
+		"_id": "bolt",
+		"name": "Bolt",
+		"specie": "autruche",
+		"birth_date": "",
+		"death_date": "",
+		"sex": "M",
+		"observations": "",
+		"position": "dedans"
+	}
+]

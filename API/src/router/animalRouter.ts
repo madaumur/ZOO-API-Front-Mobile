@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express'
-import fs from 'fs'
+import { animalModel, IAnimal } from '../model/animal'
 
 const animalRouter: express.Router = express.Router()
 
@@ -16,14 +16,15 @@ animalRouter.get('/', (req: Request, res: Response): void => {
 	)
 })
 
-animalRouter.get('/list', (req: Request, res: Response): void => {
-	fs.readFile('./ressource/animals.json', 'utf-8', (error, result) => {
-		if (error) {
-			console.log(error)
-		}
+animalRouter.get('/list', async (req: Request, res: Response) => {
+	try {
+		const animal: IAnimal[] = await animalModel.find().exec()
 
-		res.status(200).end(`${result}`)
-	})
+		return res.status(200).json(animal)
+	} catch (error) {
+		console.error(error)
+		return res.status(500).json({ error: 'Sorry, something went wrong :/' })
+	}
 })
 
 animalRouter.post('/new', (req: Request, res: Response): void => {

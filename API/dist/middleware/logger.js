@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-let appLogger = (req, res, next) => {
-    let url = req.url;
+let logger = (req, res, next) => {
+    let url = req.originalUrl;
     let method = req.method;
     let date = new Date().toLocaleDateString();
     let time = new Date().toLocaleTimeString();
@@ -9,4 +9,4 @@ let appLogger = (req, res, next) => {
     console.log(result);
     next();
 };
-exports.default = appLogger;
+exports.default = logger;

@@ -1,8 +1,8 @@
+
 import express, { Request, Response, NextFunction } from 'express'
 
-let appLogger = (req: Request, res: Response, next: NextFunction): void => {
-	let url: string = req.url
-
+let logger = (req: Request, res: Response, next: NextFunction): void => {
+	let url: string = req.originalUrl
 	let method: string = req.method
 	let date: string = new Date().toLocaleDateString()
 	let time: string = new Date().toLocaleTimeString()
@@ -12,4 +12,4 @@ let appLogger = (req: Request, res: Response, next: NextFunction): void => {
 	next()
 }
 
-export default appLogger
+export default logger
