@@ -1,15 +1,22 @@
-import express, { request, Request, Response } from 'express'
+import express, { Request, Response } from 'express'
 import fs from 'fs'
 
 const animalRouter: express.Router = express.Router()
 
+/*
+	@usage : 	test URL
+	@url: 		http://localhost:8080/api/animal/
+	@methode: 	GET
+	@fields: 	none
+	@access: 	public
+*/
 animalRouter.get('/', (req: Request, res: Response): void => {
 	res.status(200).send(
 		'<h4 style="font-family: Lato,sans-serif; color:purple">Animal API access</h4>'
 	)
 })
 
-animalRouter.get('/listall', (req: Request, res: Response): void => {
+animalRouter.get('/list', (req: Request, res: Response): void => {
 	fs.readFile('./ressource/animals.json', 'utf-8', (error, result) => {
 		if (error) {
 			console.log(error)
@@ -18,7 +25,6 @@ animalRouter.get('/listall', (req: Request, res: Response): void => {
 		res.status(200).end(`${result}`)
 	})
 })
-
 
 animalRouter.post('/new', (req: Request, res: Response): void => {
 	let data = req.body
