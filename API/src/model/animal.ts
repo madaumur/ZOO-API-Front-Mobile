@@ -1,44 +1,17 @@
-import { model, Schema, Document } from 'mongoose'
+import { model, Schema } from 'mongoose'
+import { animalInterface } from './animal.interface'
 
-interface IAnimal extends Document {
-	_id: string
-	name: string
-	specie: string
-	birth_date: string
-	death_date: string
-	sex: string
-	observations: string
-	position: string
-}
-
-const animalSchema = new Schema({
-	_id: {
-		type: String,
-
-	},
-	name: {
-		type: String,
-	},
-	specie: {
-		type: String,
-	},
-	birth_date: {
-		type: String,
-	},
-	death_date: {
-		type: String,
-	},
-	sex: {
-		type: String,
-	},
-	observations: {
-		type: String,
-	},
-	position: {
-		type: String,
-	},
+const animalSchema = new Schema<animalInterface>({
+	_id: { type: String, required: true },
+	name: { type: String, required: true },
+	specie: { type: String, required: true },
+	birth_date: { type: Date, required: false },
+	death_date: { type: Date, required: false },
+	sex: { type: String, required: true },
+	observations: { type: String, required: false },
+	position: { type: String, required: true },
 })
 
-const animalModel = model<IAnimal>('animal', animalSchema)
+const animalModel = model<animalInterface>('animal', animalSchema)
 
-export { animalModel, IAnimal }
+export { animalModel, animalInterface }

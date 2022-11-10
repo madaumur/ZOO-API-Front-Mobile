@@ -3,30 +3,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.animalModel = void 0;
 const mongoose_1 = require("mongoose");
 const animalSchema = new mongoose_1.Schema({
-    _id: {
-        type: String,
-    },
-    name: {
-        type: String,
-    },
-    specie: {
-        type: String,
-    },
-    birth_date: {
-        type: String,
-    },
-    death_date: {
-        type: String,
-    },
-    sex: {
-        type: String,
-    },
-    observations: {
-        type: String,
-    },
-    position: {
-        type: String,
-    },
+    _id: { type: String, required: true },
+    name: { type: String, required: true },
+    specie: { type: String, required: true },
+    birth_date: { type: Date, required: false },
+    death_date: { type: Date, required: false },
+    sex: { type: String, required: true },
+    observations: { type: String, required: false },
+    position: { type: String, required: true },
 });
 const animalModel = (0, mongoose_1.model)('animal', animalSchema);
 exports.animalModel = animalModel;
