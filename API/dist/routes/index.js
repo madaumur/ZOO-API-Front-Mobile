@@ -4,10 +4,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const user_routes_1 = __importDefault(require("./user.routes"));
-const auth_routes_1 = __importDefault(require("./auth.routes"));
+const animal_routes_1 = __importDefault(require("./animal.routes"));
+const specie_routes_1 = __importDefault(require("./specie.routes"));
 const router = express_1.default.Router();
-router.get('/healthcheck', (_, res) => res.sendStatus(200));
-router.use(user_routes_1.default);
-router.use(auth_routes_1.default);
+router.get('/healthcheck', (rep, res) => res.sendStatus(200));
+router.use(animal_routes_1.default);
+router.use(specie_routes_1.default);
 exports.default = router;

@@ -1,0 +1,26 @@
+[
+	{
+		"_id": "kangourou",
+		"name": "Kangourou",
+		"sociable": false,
+		"observations": "",
+		"dangerous": true,
+		"enclosure": "desert-kangourous"
+	},
+	{
+		"_id": "koala",
+		"name": "Koala",
+		"sociable": false,
+		"observations": "",
+		"dangerous": false,
+		"enclosure": "foret-koalas"
+	},
+	{
+		"_id": "autruche",
+		"name": "Autruche",
+		"sociable": false,
+		"observations": "",
+		"dangerous": true,
+		"enclosure": "desert-kangourous"
+	}
+]

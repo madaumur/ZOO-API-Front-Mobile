@@ -4,18 +4,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const fs_1 = __importDefault(require("fs"));
+const animal_service_1 = require("../service/animal.service");
 const animalRouter = express_1.default.Router();
 animalRouter.get('/', (req, res) => {
     res.status(200).send('<h4 style="font-family: Lato,sans-serif; color:purple">Animal API access</h4>');
 });
-animalRouter.get('/listall', (req, res) => {
-    fs_1.default.readFile('./ressource/animals.json', 'utf-8', (error, result) => {
-        if (error) {
-            console.log(error);
-        }
-        res.status(200).end(`${result}`);
-    });
+animalRouter.get('/animals', async (req, res) => {
+    try {
+        const animals = await (0, animal_service_1.listAnimals)();
+        return res.status(200).json(animals);
+    }
+    catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: 'Sorry, something went wrong :/' });
+    }
 });
 animalRouter.post('/new', (req, res) => {
     let data = req.body;
