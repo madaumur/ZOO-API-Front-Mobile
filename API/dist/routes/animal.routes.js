@@ -4,17 +4,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const animal_service_1 = require("../service/animal.service");
+const animal_controller_1 = __importDefault(require("../controller/animal.controller"));
+const logger_1 = __importDefault(require("../middleware/logger"));
 const animalRouter = express_1.default.Router();
-animalRouter.get('/api/animals/info', (req, res) => {
-    res.status(200).send('Welcome on animals API');
-});
-animalRouter.get('/api/animals', async (req, res) => {
-    const animals = await (0, animal_service_1.listAnimals)();
-    return res.status(200).json(animals);
-});
-animalRouter.get('/api/animals/:id', async (req, res) => {
-    const animal = await (0, animal_service_1.findAnimal)(req.params.id);
-    return res.status(200).json(animal);
-});
+animalRouter.post('/api/animals/new', logger_1.default, animal_controller_1.default.createAnimal);
+animalRouter.get('/api/animals/', logger_1.default, animal_controller_1.default.getAllAnimals);
+animalRouter.get('/api/animals/:id', logger_1.default, animal_controller_1.default.getAnimal);
+animalRouter.put('/api/animals/:id', logger_1.default, animal_controller_1.default.updateAnimal);
+animalRouter.delete('/api/animals/:id', logger_1.default, animal_controller_1.default.deleteAnimal);
 exports.default = animalRouter;

@@ -1,7 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.animalModel = void 0;
+exports.animalInterface = exports.animalModel = void 0;
 const mongoose_1 = require("mongoose");
+const animal_interface_1 = require("../interface/animal.interface");
+Object.defineProperty(exports, "animalInterface", { enumerable: true, get: function () { return animal_interface_1.animalInterface; } });
 const animalSchema = new mongoose_1.Schema({
     _id: { type: String, required: true },
     name: { type: String, required: true },
