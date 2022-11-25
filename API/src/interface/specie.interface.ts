@@ -6,7 +6,7 @@ interface specieInterface extends Document {
 	sociable: boolean
 	observations: string
 	dangerous: boolean
-	enclosure: object
+	//enclosure: object
 }
 
 export { specieInterface }

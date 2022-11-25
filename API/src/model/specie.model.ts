@@ -7,10 +7,11 @@ const specieSchema = new Schema<specieInterface>({
 	sociable: { type: Boolean, required: true },
 	observations: { type: String, required: true },
 	dangerous: { type: Boolean, required: true },
-	enclosure: new Schema<specieInterface>({
-		_id: { type: String, required: true },
-		name: { type: String, required: true },
-	}),
+	/*enclosure: {
+		type: Schema.Types.ObjectId,
+		ref: 'enclosure',
+		required: true,
+	},*/
 })
 
 const specieModel = model<specieInterface>('specie', specieSchema)

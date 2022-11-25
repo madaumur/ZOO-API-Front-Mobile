@@ -2,31 +2,33 @@
 	{
 		"_id": "drako",
 		"name": "Drako",
-		"specie": "kangourou",
-		"birth_date": "",
+		"specie": {
+			"_id": "kangourou"
+		},
+		"birth_date": "2002-11-02",
 		"death_date": "",
 		"sex": "M",
-		"observations": "",
-		"position": "dedans"
+		"observations": "none",
+		"position": 0
 	},
 	{
 		"_id": "eucalyptus",
 		"name": "Eucalyptus",
 		"specie": "koala",
-		"birth_date": "",
+		"birth_date": "2002-11-02",
 		"death_date": "",
 		"sex": "M",
-		"observations": "",
-		"position": "dedans"
+		"observations": "none",
+		"position": 0
 	},
 	{
 		"_id": "bolt",
 		"name": "Bolt",
 		"specie": "autruche",
-		"birth_date": "",
+		"birth_date": "2002-11-02",
 		"death_date": "",
 		"sex": "M",
-		"observations": "",
-		"position": "dedans"
+		"observations": "none",
+		"position": 0
 	}
 ]

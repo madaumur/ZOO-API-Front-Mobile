@@ -3,7 +3,7 @@
 		"_id": "kangourou",
 		"name": "Kangourou",
 		"sociable": false,
-		"observations": "",
+		"observations": "none",
 		"dangerous": true,
 		"enclosure": "desert-kangourous"
 	},
@@ -11,15 +11,15 @@
 		"_id": "koala",
 		"name": "Koala",
 		"sociable": false,
-		"observations": "",
+		"observations": "none",
 		"dangerous": false,
-		"enclosure": "foret-koalas"
+		"enclosure": "forest-koalas"
 	},
 	{
 		"_id": "autruche",
 		"name": "Autruche",
 		"sociable": false,
-		"observations": "",
+		"observations": "none",
 		"dangerous": true,
 		"enclosure": "desert-kangourous"
 	}
