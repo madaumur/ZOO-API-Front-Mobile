@@ -17,23 +17,24 @@ const createAnimal = (
 
 	animal
 		.save()
-		.then((): void => {
-			res.status(201).json({ message: 'New animal registered' })
+		.then((animal): void => {
+			res.status(201).json({ message: 'New animal registered', animal })
 		})
 		.catch((error): void => {
 			res.status(400).json({ error })
 		})
-		.then((): void =>
+		.then((): void => {
 			logger.info(`[RES] code: ${res.statusCode} (${res.statusMessage})`)
-		)
+		})
 }
 
 /**
  *		GET ONE ANIMAL
  */
-const getAnimal = (req: Request, res: Response, next: NextFunction): void => {
+const getAnimal = (req: Request, res: Response, next: NextFunction) => {
 	animalModel
 		.findById(req.params.id)
+		.populate({ path: 'specie', select: 'name enclosure' })
 		.then((result) =>
 			result
 				? res.status(200).json(result)
@@ -43,6 +44,8 @@ const getAnimal = (req: Request, res: Response, next: NextFunction): void => {
 		.then((): void =>
 			logger.info(`[RES] code: ${res.statusCode} (${res.statusMessage})`)
 		)
+
+	return animalModel
 }
 
 /**
@@ -55,6 +58,7 @@ const getAllAnimals = (
 ): void => {
 	animalModel
 		.find()
+		.populate({ path: 'specie', select: 'name enclosure' })
 		.then((result) =>
 			result
 				? res.status(200).json(result)
@@ -86,6 +90,20 @@ const updateAnimal = (
 			logger.info(`[RES] code: ${res.statusCode} (${res.statusMessage})`)
 		)
 }
+
+// /**
+//  *		UPDATE ONE ANIMAL
+//  */
+// const moveInsideAnimal = (
+// 	req: Request,
+// 	res: Response,
+// 	next: NextFunction
+// ): void => {
+// 	animalModel
+// 		.findById(req.params.id)
+// 		.updateOne()
+
+// }
 
 /**
  *		DELETE AN ANIMAL

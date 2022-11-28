@@ -3,35 +3,32 @@ import { animalInterface } from '../interface/animal.interface'
 
 const animalSchema = new Schema<animalInterface>(
 	{
-		_id: { type: String, required: true },
-		name: { type: String, required: true },
-		specie: { type: Schema.Types.ObjectId, ref: 'specie', required: true },
+		_id: { type: String, /*unique: true,*/ required: [true, 'id is required'] },
+		name: { type: String, required: [true, 'name is required'] },
+		specie: {
+			type: String,
+			ref: 'specie',
+			required: [true, 'specie is required'],
+		},
 		birth_date: { type: Date, required: false },
 		death_date: { type: Date, required: false },
 		sex: {
 			type: String,
-			required: true,
+			required: [true, 'sex is required and must be F, M or unknown'],
 			enum: ['F', 'M', 'Unknown'],
 			default: 'Unknown',
 		},
 		observations: { type: String, required: false, default: 'none' },
 		position: {
 			type: Number,
-			required: true,
+			required: [true, 'position is required and must 0, 1, 2 or 3'],
 			enum: [0, 1, 2, 3],
 			default: 0,
 		},
 	},
-	{ versionKey: undefined }
+	{ versionKey: false, timestamps: true }
 )
-/*
-enum postion {
-	inside = 0,
-	outside = 1,
-	clinic = 2,
-	loan = 3,
-}
-*/
+
 const animalModel = model<animalInterface>('animal', animalSchema)
 
 export { animalModel, animalInterface }

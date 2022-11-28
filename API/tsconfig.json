@@ -16,7 +16,7 @@
 		"esModuleInterop": true,
 		"allowSyntheticDefaultImports": true
 	},
-	"include": ["src/**/*", "../temp/zone.controller.ts"],
+	"include": ["src/**/*", "src/controller/zone.controller.ts"],
 	/* @TODO*: remove excedant */
 	"exclude": ["node_modules", "../temp", "../P1", "../P2", "../P3"]
 }

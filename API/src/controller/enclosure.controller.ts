@@ -1,24 +1,24 @@
 import { Request, Response, NextFunction } from 'express'
-import { specieModel, specieInterface } from '../model/specie.model'
+import { enclosureModel, enclosureInterface } from '../model/enclosure.model'
 import logger from '../utils/logger'
 
 /**
- *		CREATE A SPECIE
+ *		CREATE AN ENCLOSURE
  */
-const createSpecie = (
+const createEnclosure = (
 	req: Request,
 	res: Response,
 	next: NextFunction
 ): void => {
-	const specieData: specieInterface = req.body
-	const specie = new specieModel({
-		...specieData,
+	const enclosureData: enclosureInterface = req.body
+	const enclosure = new enclosureModel({
+		...enclosureData,
 	})
 
-	specie
+	enclosure
 		.save()
-		.then((specie): void => {
-			res.status(201).json({ message: 'New specie registered', specie })
+		.then((): void => {
+			res.status(201).json({ message: 'New enclosure registered' })
 		})
 		.catch((error): void => {
 			res.status(400).json({ error })
@@ -29,16 +29,16 @@ const createSpecie = (
 }
 
 /**
- *		GET ONE SPECIE
+ *		GET ONE ENCLOSURE
  */
-const getSpecie = (req: Request, res: Response, next: NextFunction): void => {
-	specieModel
+const getEnclosure = (req: Request, res: Response, next: NextFunction): void => {
+	enclosureModel
 		.findById(req.params.id)
-		.populate('enclosure')
+		.populate('zone')
 		.then((result) =>
 			result
 				? res.status(200).json(result)
-				: res.status(404).json({ error: 'Specie not found' })
+				: res.status(404).json({ error: 'Enclosure not found' })
 		)
 		.catch((error) => res.status(500).json({ error }))
 		.then((): void =>
@@ -47,19 +47,19 @@ const getSpecie = (req: Request, res: Response, next: NextFunction): void => {
 }
 
 /**
- *		GET ALL SPECIES
+ *		GET ALL ENCLOSURES
  */
-const getAllSpecies = (
+const getAllEnclosures = (
 	req: Request,
 	res: Response,
 	next: NextFunction
 ): void => {
-	specieModel
+	enclosureModel
 		.find()
 		.then((result) =>
 			result
 				? res.status(200).json(result)
-				: res.status(404).json({ error: 'Species not found' })
+				: res.status(404).json({ error: 'Enclosures not found' })
 		)
 		.catch((error) => res.status(404).json({ error }))
 		.then((): void =>
@@ -68,19 +68,19 @@ const getAllSpecies = (
 }
 
 /**
- *		UPDATE ONE SPECIE
+ *		UPDATE ONE ENCLOSURE
  */
-const updateSpecie = (
+const updateEnclosure = (
 	req: Request,
 	res: Response,
 	next: NextFunction
 ): void => {
-	specieModel
+	enclosureModel
 		.findByIdAndUpdate(req.params.id, req.body)
 		.then((result) =>
 			result
 				? res.status(202).json(result)
-				: res.status(404).json({ error: 'Specie not found' })
+				: res.status(404).json({ error: 'Enclosure not found' })
 		)
 		.catch((error) => res.status(500).json({ error }))
 		.then((): void =>
@@ -89,19 +89,19 @@ const updateSpecie = (
 }
 
 /**
- *		DELETE A SPECIE
+ *		DELETE A ENCLOSURE
  */
-const deleteSpecie = (
+const deleteenclosure = (
 	req: Request,
 	res: Response,
 	next: NextFunction
 ): void => {
-	specieModel
+	enclosureModel
 		.findByIdAndDelete(req.params.id)
 		.then((result) =>
 			result
 				? res.status(410).json(result)
-				: res.status(404).json({ error: 'Specie not found' })
+				: res.status(404).json({ error: 'Enclosure not found' })
 		)
 		.catch((error) => res.status(500).json({ error }))
 		.then((): void =>
@@ -110,9 +110,9 @@ const deleteSpecie = (
 }
 
 export default {
-	createSpecie,
-	getAllSpecies,
-	getSpecie,
-	updateSpecie,
-	deleteSpecie,
+	createEnclosure,
+	getAllEnclosures,
+	getEnclosure,
+	updateEnclosure,
+	deleteenclosure,
 }

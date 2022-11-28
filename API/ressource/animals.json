@@ -2,33 +2,61 @@
 	{
 		"_id": "drako",
 		"name": "Drako",
-		"specie": {
-			"_id": "kangourou"
-		},
-		"birth_date": "2002-11-02",
+		"specie": "kangourou",
+		"birth_date": "",
 		"death_date": "",
 		"sex": "M",
-		"observations": "none",
+		"observations": "",
+		"position": 0
+	},
+	{
+		"_id": "ginger",
+		"name": "Ginger",
+		"specie": "kangourou",
+		"birth_date": "",
+		"death_date": "",
+		"sex": "F",
+		"observations": "",
 		"position": 0
 	},
 	{
 		"_id": "eucalyptus",
 		"name": "Eucalyptus",
 		"specie": "koala",
-		"birth_date": "2002-11-02",
+		"birth_date": "",
 		"death_date": "",
 		"sex": "M",
-		"observations": "none",
+		"observations": "",
+		"position": 0
+	},
+	{
+		"_id": "peluche",
+		"name": "Peluche",
+		"specie": "koala",
+		"birth_date": "",
+		"death_date": "",
+		"sex": "F",
+		"observations": "",
 		"position": 0
 	},
 	{
 		"_id": "bolt",
 		"name": "Bolt",
 		"specie": "autruche",
-		"birth_date": "2002-11-02",
+		"birth_date": "",
 		"death_date": "",
 		"sex": "M",
-		"observations": "none",
+		"observations": "",
+		"position": 0
+	},
+	{
+		"_id": "kalia",
+		"name": "Kalia",
+		"specie": "autruche",
+		"birth_date": "",
+		"death_date": "",
+		"sex": "F",
+		"observations": "",
 		"position": 0
 	}
 ]
