@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
 import { animalModel, animalInterface } from '../model/animal.model'
+import whereToMove from '../utils/function'
 import logger from '../utils/logger'
 
 /**
@@ -91,19 +92,69 @@ const updateAnimal = (
 		)
 }
 
-// /**
-//  *		UPDATE ONE ANIMAL
-//  */
-// const moveInsideAnimal = (
-// 	req: Request,
-// 	res: Response,
-// 	next: NextFunction
-// ): void => {
-// 	animalModel
-// 		.findById(req.params.id)
-// 		.updateOne()
-
-// }
+/**
+ *		MOVE AN ANIMAL
+ */
+const moveAnimal = (req: Request, res: Response, next: NextFunction): void => {
+	let place: number = whereToMove(req.url)
+	animalModel
+		.findById(req.params.id)
+		.then((result) => {
+			if (!result) {
+				res.status(404).json({ error: 'Animal not found' })
+			} else {
+				switch (place) {
+					case 0:
+						animalModel
+							.updateOne(
+								{ _id: req.params.id },
+								{ $set: { position: 0 } }
+							)
+							.orFail()
+							.exec()
+						res.status(202).json(result)
+						break
+					case 1:
+						animalModel
+							.updateOne(
+								{ _id: req.params.id },
+								{ $set: { position: 1 } }
+							)
+							.orFail()
+							.exec()
+						res.status(202).json(result)
+						break
+					case 2:
+						animalModel
+							.updateOne(
+								{ _id: req.params.id },
+								{ $set: { position: 2 } }
+							)
+							.orFail()
+							.exec()
+						res.status(202).json(result)
+						break
+					case 3:
+						animalModel
+							.updateOne(
+								{ _id: req.params.id },
+								{ $set: { position: 3 } }
+							)
+							.orFail()
+							.exec()
+						res.status(202).json(result)
+						break
+					default:
+						res.status(400).json({ error: 'Bad request' })
+						break
+				}
+			}
+		})
+		.catch((error) => res.status(500).json({ error }))
+		.then((): void =>
+			logger.info(`[RES] code: ${res.statusCode} (${res.statusMessage})`)
+		)
+}
 
 /**
  *		DELETE AN ANIMAL
@@ -128,8 +179,9 @@ const deleteAnimal = (
 
 export default {
 	createAnimal,
-	getAllAnimals,
 	getAnimal,
 	updateAnimal,
 	deleteAnimal,
+	getAllAnimals,
+	moveAnimal,
 }

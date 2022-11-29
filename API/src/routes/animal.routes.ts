@@ -11,13 +11,6 @@ animalRouter.post(
 	animalController.createAnimal
 )
 
-// GET ALL ANIMALS
-animalRouter.get(
-	'/api/animals/',
-	loggerMiddleware,
-	animalController.getAllAnimals,
-)
-
 // GET ONE ANIMAL BY ID
 animalRouter.get(
 	'/api/animals/:id',
@@ -37,6 +30,41 @@ animalRouter.delete(
 	'/api/animals/:id',
 	loggerMiddleware,
 	animalController.deleteAnimal
+)
+
+// GET ALL ANIMALS
+animalRouter.get(
+	'/api/animals/',
+	loggerMiddleware,
+	animalController.getAllAnimals
+)
+
+// MOVE AN ANIMAL INSIDE
+animalRouter.post(
+	'/api/animals/:id/getin',
+	loggerMiddleware,
+	animalController.moveAnimal
+)
+
+// MOVE AN ANIMAL OUTSIDE
+animalRouter.post(
+	'/api/animals/:id/getout',
+	loggerMiddleware,
+	animalController.moveAnimal
+)
+
+// MOVE AN ANIMAL TO CLINIC
+animalRouter.post(
+	'/api/animals/:id/toclinic',
+	loggerMiddleware,
+	animalController.moveAnimal
+)
+
+// MOVE AN ANIMAL TO LOAN
+animalRouter.post(
+	'/api/animals/:id/toloan',
+	loggerMiddleware,
+	animalController.moveAnimal
 )
 
 export default animalRouter
