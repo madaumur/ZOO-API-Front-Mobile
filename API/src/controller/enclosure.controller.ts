@@ -31,37 +31,21 @@ const createEnclosure = (
 /**
  *		GET ONE ENCLOSURE
  */
-const getEnclosure = (req: Request, res: Response, next: NextFunction): void => {
-	enclosureModel
-		.findById(req.params.id)
-		.populate('zone')
-		.then((result) =>
-			result
-				? res.status(200).json(result)
-				: res.status(404).json({ error: 'Enclosure not found' })
-		)
-		.catch((error) => res.status(500).json({ error }))
-		.then((): void =>
-			logger.info(`[RES] code: ${res.statusCode} (${res.statusMessage})`)
-		)
-}
-
-/**
- *		GET ALL ENCLOSURES
- */
-const getAllEnclosures = (
+const getEnclosure = (
 	req: Request,
 	res: Response,
 	next: NextFunction
 ): void => {
 	enclosureModel
-		.find()
-		.then((result) =>
-			result
-				? res.status(200).json(result)
-				: res.status(404).json({ error: 'Enclosures not found' })
+		.findById(req.params.id)
+		.populate('zone')
+		.then(
+			(result): Response<any> =>
+				result
+					? res.status(200).json(result)
+					: res.status(404).json({ error: 'Enclosure not found' })
 		)
-		.catch((error) => res.status(404).json({ error }))
+		.catch((error): Response<any> => res.status(500).json({ error }))
 		.then((): void =>
 			logger.info(`[RES] code: ${res.statusCode} (${res.statusMessage})`)
 		)
@@ -77,10 +61,11 @@ const updateEnclosure = (
 ): void => {
 	enclosureModel
 		.findByIdAndUpdate(req.params.id, req.body)
-		.then((result) =>
-			result
-				? res.status(202).json(result)
-				: res.status(404).json({ error: 'Enclosure not found' })
+		.then(
+			(result): Response<any> =>
+				result
+					? res.status(202).json(result)
+					: res.status(404).json({ error: 'Enclosure not found' })
 		)
 		.catch((error) => res.status(500).json({ error }))
 		.then((): void =>
@@ -98,12 +83,35 @@ const deleteenclosure = (
 ): void => {
 	enclosureModel
 		.findByIdAndDelete(req.params.id)
-		.then((result) =>
-			result
-				? res.status(410).json(result)
-				: res.status(404).json({ error: 'Enclosure not found' })
+		.then(
+			(result): Response<any> =>
+				result
+					? res.status(410).json(result)
+					: res.status(404).json({ error: 'Enclosure not found' })
 		)
-		.catch((error) => res.status(500).json({ error }))
+		.catch((error): Response<any> => res.status(500).json({ error }))
+		.then((): void =>
+			logger.info(`[RES] code: ${res.statusCode} (${res.statusMessage})`)
+		)
+}
+
+/**
+ *		GET ALL ENCLOSURES
+ */
+const getAllEnclosures = (
+	req: Request,
+	res: Response,
+	next: NextFunction
+): void => {
+	enclosureModel
+		.find()
+		.then(
+			(result): Response<any> =>
+				result
+					? res.status(200).json(result)
+					: res.status(404).json({ error: 'Enclosures not found' })
+		)
+		.catch((error): Response<any> => res.status(404).json({ error }))
 		.then((): void =>
 			logger.info(`[RES] code: ${res.statusCode} (${res.statusMessage})`)
 		)
@@ -111,8 +119,8 @@ const deleteenclosure = (
 
 export default {
 	createEnclosure,
-	getAllEnclosures,
 	getEnclosure,
 	updateEnclosure,
 	deleteenclosure,
+	getAllEnclosures,
 }

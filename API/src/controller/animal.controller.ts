@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
 import { animalModel, animalInterface } from '../model/animal.model'
-import whereToMove from '../utils/function'
+import { urlToPosition } from '../utils/function'
 import logger from '../utils/logger'
 
 /**
@@ -32,40 +32,17 @@ const createAnimal = (
 /**
  *		GET ONE ANIMAL
  */
-const getAnimal = (req: Request, res: Response, next: NextFunction) => {
+const getAnimal = (req: Request, res: Response, next: NextFunction): void => {
 	animalModel
 		.findById(req.params.id)
 		.populate({ path: 'specie', select: 'name enclosure' })
-		.then((result) =>
-			result
-				? res.status(200).json(result)
-				: res.status(404).json({ error: 'Animal not found' })
+		.then(
+			(result): Response<any> =>
+				result
+					? res.status(200).json(result)
+					: res.status(404).json({ error: 'Animal not found' })
 		)
-		.catch((error) => res.status(500).json({ error }))
-		.then((): void =>
-			logger.info(`[RES] code: ${res.statusCode} (${res.statusMessage})`)
-		)
-
-	return animalModel
-}
-
-/**
- *		GET ALL ANIMALS
- */
-const getAllAnimals = (
-	req: Request,
-	res: Response,
-	next: NextFunction
-): void => {
-	animalModel
-		.find()
-		.populate({ path: 'specie', select: 'name enclosure' })
-		.then((result) =>
-			result
-				? res.status(200).json(result)
-				: res.status(404).json({ error: 'Animals not found' })
-		)
-		.catch((error) => res.status(404).json({ error }))
+		.catch((error): Response<any> => res.status(500).json({ error }))
 		.then((): void =>
 			logger.info(`[RES] code: ${res.statusCode} (${res.statusMessage})`)
 		)
@@ -81,12 +58,58 @@ const updateAnimal = (
 ): void => {
 	animalModel
 		.findByIdAndUpdate(req.params.id, req.body)
-		.then((result) =>
-			result
-				? res.status(202).json(result)
-				: res.status(404).json({ error: 'Animal not found' })
+		.then(
+			(result): Response<any> =>
+				result
+					? res.status(202).json(result)
+					: res.status(404).json({ error: 'Animal not found' })
 		)
-		.catch((error) => res.status(500).json({ error }))
+		.catch((error): Response<any> => res.status(500).json({ error }))
+		.then((): void =>
+			logger.info(`[RES] code: ${res.statusCode} (${res.statusMessage})`)
+		)
+}
+
+/**
+ *		DELETE AN ANIMAL
+ */
+const deleteAnimal = (
+	req: Request,
+	res: Response,
+	next: NextFunction
+): void => {
+	animalModel
+		.findByIdAndDelete(req.params.id)
+		.then(
+			(result): Response<any> =>
+				result
+					? res.status(410).json(result)
+					: res.status(404).json({ error: 'Animal not found' })
+		)
+		.catch((error): Response<any> => res.status(500).json({ error }))
+		.then((): void =>
+			logger.info(`[RES] code: ${res.statusCode} (${res.statusMessage})`)
+		)
+}
+
+/**
+ *		GET ALL ANIMALS
+ */
+const getAllAnimals = (
+	req: Request,
+	res: Response,
+	next: NextFunction
+): void => {
+	animalModel
+		.find()
+		.populate({ path: 'specie', select: 'name enclosure' })
+		.then(
+			(result): Response<any> =>
+				result
+					? res.status(200).json(result)
+					: res.status(404).json({ error: 'Animals not found' })
+		)
+		.catch((error): Response<any> => res.status(404).json({ error }))
 		.then((): void =>
 			logger.info(`[RES] code: ${res.statusCode} (${res.statusMessage})`)
 		)
@@ -96,10 +119,10 @@ const updateAnimal = (
  *		MOVE AN ANIMAL
  */
 const moveAnimal = (req: Request, res: Response, next: NextFunction): void => {
-	let place: number = whereToMove(req.url)
+	let place: number = urlToPosition(req.url)
 	animalModel
 		.findById(req.params.id)
-		.then((result) => {
+		.then((result): void => {
 			if (!result) {
 				res.status(404).json({ error: 'Animal not found' })
 			} else {
@@ -150,28 +173,7 @@ const moveAnimal = (req: Request, res: Response, next: NextFunction): void => {
 				}
 			}
 		})
-		.catch((error) => res.status(500).json({ error }))
-		.then((): void =>
-			logger.info(`[RES] code: ${res.statusCode} (${res.statusMessage})`)
-		)
-}
-
-/**
- *		DELETE AN ANIMAL
- */
-const deleteAnimal = (
-	req: Request,
-	res: Response,
-	next: NextFunction
-): void => {
-	animalModel
-		.findByIdAndDelete(req.params.id)
-		.then((result) =>
-			result
-				? res.status(410).json(result)
-				: res.status(404).json({ error: 'Animal not found' })
-		)
-		.catch((error) => res.status(500).json({ error }))
+		.catch((error): Response<any> => res.status(500).json({ error }))
 		.then((): void =>
 			logger.info(`[RES] code: ${res.statusCode} (${res.statusMessage})`)
 		)
