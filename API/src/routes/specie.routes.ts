@@ -1,62 +1,62 @@
 import express from 'express'
-import specieController from '../controller/specie.controller'
-import loggerMiddleware from '../middleware/logger'
+import SpecieController from '../controller/specie.controller'
+import LoggerMiddleware from '../middleware/logger'
 
-const specieRouter: express.Router = express.Router()
+const SpecieRouter: express.Router = express.Router()
 
 // CREATE A SPECIE
-specieRouter.post(
+SpecieRouter.post(
 	'/api/species/new',
-	loggerMiddleware,
-	specieController.createSpecie
+	LoggerMiddleware,
+	SpecieController.createSpecie
 )
 
 // GET A SPECIE BY ID
-specieRouter.get(
+SpecieRouter.get(
 	'/api/species/:id',
-	loggerMiddleware,
-	specieController.getSpecie
+	LoggerMiddleware,
+	SpecieController.getSpecie
 )
 
 // UPDATE A SPECIE BY ID
-specieRouter.put(
+SpecieRouter.put(
 	'/api/species/:id',
-	loggerMiddleware,
-	specieController.updateSpecie
+	LoggerMiddleware,
+	SpecieController.updateSpecie
 )
 
 // DELETE A SPECIE BY ID
-specieRouter.delete(
+SpecieRouter.delete(
 	'/api/species/:id',
-	loggerMiddleware,
-	specieController.deleteSpecie
+	LoggerMiddleware,
+	SpecieController.deleteSpecie
 )
 
 // GET ALL SPECIES
-specieRouter.get(
+SpecieRouter.get(
 	'/api/species/',
-	loggerMiddleware,
-	specieController.getAllSpecies
+	LoggerMiddleware,
+	SpecieController.getAllSpecies
 )
 
 // LIST ALL ANIMALS FROM A SPECIE
-specieRouter.get(
+SpecieRouter.get(
 	'/api/species/:id/animals',
-	loggerMiddleware,
-	specieController.listAnimalFromSpecie
+	LoggerMiddleware,
+	SpecieController.listAnimalFromSpecie
 )
 
 // BRING IN ALL ANIMALS FROM A SPECIE (EXCEPT THOSE IN CLINIC OR LOAN)
-specieRouter.put(
+SpecieRouter.put(
 	'/api/species/:id/getin',
-	loggerMiddleware,
-	specieController.moveSpecie
+	LoggerMiddleware,
+	SpecieController.moveSpecie
 )
 
 // TAKE OUT ALL ANIMALS FROM A SPECIE (EXCEPT THOSE IN CLINIC OR LOAN)
-specieRouter.put(
+SpecieRouter.put(
 	'/api/species/:id/getout',
-	loggerMiddleware,
-	specieController.moveSpecie
+	LoggerMiddleware,
+	SpecieController.moveSpecie
 )
-export default specieRouter
+export default SpecieRouter

@@ -1,7 +1,7 @@
 import { model, Schema } from 'mongoose'
-import { specieInterface } from '../interface/specie.interface'
+import { SpecieInterface } from '../interface/specie.interface'
 
-const specieSchema = new Schema<specieInterface>(
+const SpecieSchema = new Schema<SpecieInterface>(
 	{
 		_id: {
 			type: String,
@@ -20,6 +20,6 @@ const specieSchema = new Schema<specieInterface>(
 	{ versionKey: false, timestamps: true }
 )
 
-const specieModel = model<specieInterface>('specie', specieSchema)
+const SpecieModel = model<SpecieInterface>('specie', SpecieSchema)
 
-export { specieModel, specieInterface }
+export { SpecieModel, SpecieInterface }

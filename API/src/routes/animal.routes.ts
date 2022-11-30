@@ -1,70 +1,70 @@
 import express from 'express'
-import animalController from '../controller/animal.controller'
-import loggerMiddleware from '../middleware/logger'
+import AnimalController from '../controller/animal.controller'
+import LoggerMiddleware from '../middleware/logger'
 
-const animalRouter: express.Router = express.Router()
+const AnimalRouter: express.Router = express.Router()
 
 // CREATE AN ANIMAL
-animalRouter.post(
+AnimalRouter.post(
 	'/api/animals/new',
-	loggerMiddleware,
-	animalController.createAnimal
+	LoggerMiddleware,
+	AnimalController.createAnimal
 )
 
 // GET ONE ANIMAL BY ID
-animalRouter.get(
+AnimalRouter.get(
 	'/api/animals/:id',
-	loggerMiddleware,
-	animalController.getAnimal
+	LoggerMiddleware,
+	AnimalController.getAnimal
 )
 
 // UPDATE AN ANIMAL BY ID
-animalRouter.put(
+AnimalRouter.put(
 	'/api/animals/:id',
-	loggerMiddleware,
-	animalController.updateAnimal
+	LoggerMiddleware,
+	AnimalController.updateAnimal
 )
 
 // DELETE AN ANIMAL BY ID
-animalRouter.delete(
+AnimalRouter.delete(
 	'/api/animals/:id',
-	loggerMiddleware,
-	animalController.deleteAnimal
+	LoggerMiddleware,
+	AnimalController.deleteAnimal
 )
 
 // GET ALL ANIMALS
-animalRouter.get(
+AnimalRouter.get(
 	'/api/animals/',
-	loggerMiddleware,
-	animalController.getAllAnimals
+	LoggerMiddleware,
+	AnimalController.getAllAnimals
 )
 
 // BRING IN AN ANIMAL
-animalRouter.post(
+AnimalRouter.post(
 	'/api/animals/:id/getin',
-	loggerMiddleware,
-	animalController.moveAnimal
+	LoggerMiddleware,
+	AnimalController.moveAnimal
 )
 
 // TAKE OUT AN ANIMAL
-animalRouter.post(
+AnimalRouter.post(
 	'/api/animals/:id/getout',
-	loggerMiddleware,
-	animalController.moveAnimal
+	LoggerMiddleware,
+	AnimalController.moveAnimal
 )
 
 // MOVE AN ANIMAL TO CLINIC
-animalRouter.post(
+AnimalRouter.post(
 	'/api/animals/:id/toclinic',
-	loggerMiddleware,
-	animalController.moveAnimal
+	LoggerMiddleware,
+	AnimalController.moveAnimal
 )
 
 // MOVE AN ANIMAL TO LOAN
-animalRouter.post(
+AnimalRouter.post(
 	'/api/animals/:id/toloan',
-	loggerMiddleware,
-	animalController.moveAnimal
+	LoggerMiddleware,
+	AnimalController.moveAnimal
 )
 
-export default animalRouter
+export default AnimalRouter

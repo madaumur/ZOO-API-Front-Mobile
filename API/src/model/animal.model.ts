@@ -1,7 +1,7 @@
 import { model, Schema } from 'mongoose'
-import { animalInterface } from '../interface/animal.interface'
+import { AnimalInterface } from '../interface/animal.interface'
 
-const animalSchema = new Schema<animalInterface>(
+const AnimalSchema = new Schema<AnimalInterface>(
 	{
 		_id: { type: String, /*unique: true,*/ required: [true, 'id is required'] },
 		name: { type: String, required: [true, 'name is required'] },
@@ -29,6 +29,6 @@ const animalSchema = new Schema<animalInterface>(
 	{ versionKey: false, timestamps: true }
 )
 
-const animalModel = model<animalInterface>('animal', animalSchema)
+const AnimalModel = model<AnimalInterface>('animal', AnimalSchema)
 
-export { animalModel, animalInterface }
+export { AnimalModel, AnimalInterface }

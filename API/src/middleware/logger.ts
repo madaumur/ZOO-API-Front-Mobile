@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import logger from '../utils/logger'
 
-function loggerMiddleware(
+function LoggerMiddleware(
 	req: Request,
 	res: Response,
 	next: NextFunction
@@ -10,4 +10,4 @@ function loggerMiddleware(
 	next()
 }
 
-export default loggerMiddleware
+export default LoggerMiddleware

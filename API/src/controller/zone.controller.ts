@@ -1,13 +1,13 @@
 import { Request, Response, NextFunction } from 'express'
-import { zoneModel, zoneInterface } from '../model/zone.model'
+import { ZoneModel, ZoneInterface } from '../model/zone.model'
 import logger from '../utils/logger'
 
 /**
  *		CREATE A ZONE
  */
 const createZone = (req: Request, res: Response, next: NextFunction): void => {
-	const zoneData: zoneInterface = req.body
-	const zone = new zoneModel({
+	const zoneData: ZoneInterface = req.body
+	const zone = new ZoneModel({
 		...zoneData,
 	})
 
@@ -27,7 +27,7 @@ const createZone = (req: Request, res: Response, next: NextFunction): void => {
  *		GET ONE ZONE
  */
 const getZone = (req: Request, res: Response, next: NextFunction): void => {
-	zoneModel
+	ZoneModel
 		.findById(req.params.id)
 		.then((result) =>
 			result
@@ -44,7 +44,7 @@ const getZone = (req: Request, res: Response, next: NextFunction): void => {
  *		UPDATE ONE ZONE
  */
 const updateZone = (req: Request, res: Response, next: NextFunction): void => {
-	zoneModel
+	ZoneModel
 		.findByIdAndUpdate(req.params.id, req.body)
 		.then((result) =>
 			result
@@ -61,7 +61,7 @@ const updateZone = (req: Request, res: Response, next: NextFunction): void => {
  *		DELETE A ZONE
  */
 const deleteZone = (req: Request, res: Response, next: NextFunction): void => {
-	zoneModel
+	ZoneModel
 		.findByIdAndDelete(req.params.id)
 		.then((result) =>
 			result
@@ -78,7 +78,7 @@ const deleteZone = (req: Request, res: Response, next: NextFunction): void => {
  *		GET ALL ZONES
  */
 const getAllZones = (req: Request, res: Response, next: NextFunction): void => {
-	zoneModel
+	ZoneModel
 		.find()
 		.then((result) =>
 			result

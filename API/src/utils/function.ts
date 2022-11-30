@@ -1,4 +1,4 @@
-function urlToPosition(url: string): number {
+export function urlToPosition(url: string): number {
 	if (url.includes('/getin')) {
 		return 0
 	} else if (url.includes('/getout')) {
@@ -10,12 +10,10 @@ function urlToPosition(url: string): number {
 	} else return -1
 }
 
-function reversePosition(position: number): number {
+export function reversePosition(position: number): number {
 	if (position == 0) {
 		return 1
 	} else if (position == 1) {
 		return 0
 	} else return -1
 }
-
-export { urlToPosition, reversePosition }
