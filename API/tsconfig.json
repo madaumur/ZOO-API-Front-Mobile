@@ -17,5 +17,6 @@
 		"allowSyntheticDefaultImports": true
 	},
 	"include": ["src/**/*"],
-	"exclude": ["node_modules"]
+	/* @TODO*: remove excedant */
+	"exclude": ["node_modules", "../temp"]
 }

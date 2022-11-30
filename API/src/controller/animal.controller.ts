@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
 import { animalModel, animalInterface } from '../model/animal.model'
+import { urlToPosition } from '../utils/function'
 import logger from '../utils/logger'
 
 /**
@@ -17,15 +18,15 @@ const createAnimal = (
 
 	animal
 		.save()
-		.then((): void => {
-			res.status(201).json({ message: 'New animal registered' })
+		.then((animal): void => {
+			res.status(201).json({ message: 'New animal registered', animal })
 		})
 		.catch((error): void => {
 			res.status(400).json({ error })
 		})
-		.then((): void =>
+		.then((): void => {
 			logger.info(`[RES] code: ${res.statusCode} (${res.statusMessage})`)
-		)
+		})
 }
 
 /**
@@ -34,33 +35,14 @@ const createAnimal = (
 const getAnimal = (req: Request, res: Response, next: NextFunction): void => {
 	animalModel
 		.findById(req.params.id)
-		.then((result) =>
-			result
-				? res.status(200).json(result)
-				: res.status(404).json({ error: 'Animal not found' })
+		.populate({ path: 'specie', select: 'name enclosure' })
+		.then(
+			(result): Response<any> =>
+				result
+					? res.status(200).json(result)
+					: res.status(404).json({ error: 'Animal not found' })
 		)
-		.catch((error) => res.status(500).json({ error }))
-		.then((): void =>
-			logger.info(`[RES] code: ${res.statusCode} (${res.statusMessage})`)
-		)
-}
-
-/**
- *		GET ALL ANIMALS
- */
-const getAllAnimals = (
-	req: Request,
-	res: Response,
-	next: NextFunction
-): void => {
-	animalModel
-		.find()
-		.then((result) =>
-			result
-				? res.status(200).json(result)
-				: res.status(404).json({ error: 'Animals not found' })
-		)
-		.catch((error) => res.status(404).json({ error }))
+		.catch((error): Response<any> => res.status(500).json({ error }))
 		.then((): void =>
 			logger.info(`[RES] code: ${res.statusCode} (${res.statusMessage})`)
 		)
@@ -76,12 +58,13 @@ const updateAnimal = (
 ): void => {
 	animalModel
 		.findByIdAndUpdate(req.params.id, req.body)
-		.then((result) =>
-			result
-				? res.status(202).json(result)
-				: res.status(404).json({ error: 'Animal not found' })
+		.then(
+			(result): Response<any> =>
+				result
+					? res.status(202).json(result)
+					: res.status(404).json({ error: 'Animal not found' })
 		)
-		.catch((error) => res.status(500).json({ error }))
+		.catch((error): Response<any> => res.status(500).json({ error }))
 		.then((): void =>
 			logger.info(`[RES] code: ${res.statusCode} (${res.statusMessage})`)
 		)
@@ -97,12 +80,100 @@ const deleteAnimal = (
 ): void => {
 	animalModel
 		.findByIdAndDelete(req.params.id)
-		.then((result) =>
-			result
-				? res.status(410).json(result)
-				: res.status(404).json({ error: 'Animal not found' })
+		.then(
+			(result): Response<any> =>
+				result
+					? res.status(410).json(result)
+					: res.status(404).json({ error: 'Animal not found' })
 		)
-		.catch((error) => res.status(500).json({ error }))
+		.catch((error): Response<any> => res.status(500).json({ error }))
+		.then((): void =>
+			logger.info(`[RES] code: ${res.statusCode} (${res.statusMessage})`)
+		)
+}
+
+/**
+ *		GET ALL ANIMALS
+ */
+const getAllAnimals = (
+	req: Request,
+	res: Response,
+	next: NextFunction
+): void => {
+	animalModel
+		.find()
+		.populate({ path: 'specie', select: 'name enclosure' })
+		.then(
+			(result): Response<any> =>
+				result
+					? res.status(200).json(result)
+					: res.status(404).json({ error: 'Animals not found' })
+		)
+		.catch((error): Response<any> => res.status(404).json({ error }))
+		.then((): void =>
+			logger.info(`[RES] code: ${res.statusCode} (${res.statusMessage})`)
+		)
+}
+
+/**
+ *		MOVE AN ANIMAL
+ */
+const moveAnimal = (req: Request, res: Response, next: NextFunction): void => {
+	let place: number = urlToPosition(req.url)
+	animalModel
+		.findById(req.params.id)
+		.then((result): void => {
+			if (!result) {
+				res.status(404).json({ error: 'Animal not found' })
+			} else {
+				switch (place) {
+					case 0:
+						animalModel
+							.updateOne(
+								{ _id: req.params.id },
+								{ $set: { position: 0 } }
+							)
+							.orFail()
+							.exec()
+						res.status(202).json(result)
+						break
+					case 1:
+						animalModel
+							.updateOne(
+								{ _id: req.params.id },
+								{ $set: { position: 1 } }
+							)
+							.orFail()
+							.exec()
+						res.status(202).json(result)
+						break
+					case 2:
+						animalModel
+							.updateOne(
+								{ _id: req.params.id },
+								{ $set: { position: 2 } }
+							)
+							.orFail()
+							.exec()
+						res.status(202).json(result)
+						break
+					case 3:
+						animalModel
+							.updateOne(
+								{ _id: req.params.id },
+								{ $set: { position: 3 } }
+							)
+							.orFail()
+							.exec()
+						res.status(202).json(result)
+						break
+					default:
+						res.status(400).json({ error: 'Bad request' })
+						break
+				}
+			}
+		})
+		.catch((error): Response<any> => res.status(500).json({ error }))
 		.then((): void =>
 			logger.info(`[RES] code: ${res.statusCode} (${res.statusMessage})`)
 		)
@@ -110,8 +181,9 @@ const deleteAnimal = (
 
 export default {
 	createAnimal,
-	getAllAnimals,
 	getAnimal,
 	updateAnimal,
 	deleteAnimal,
+	getAllAnimals,
+	moveAnimal,
 }
