@@ -46,14 +46,14 @@ specieRouter.get(
 	specieController.listAnimalFromSpecie
 )
 
-// GET IN ALL ANIMALS FROM A SPECIE (EXCEPT THOSE IN CLINIC OR LOAN)
+// BRING IN ALL ANIMALS FROM A SPECIE (EXCEPT THOSE IN CLINIC OR LOAN)
 specieRouter.put(
 	'/api/species/:id/getin',
 	loggerMiddleware,
 	specieController.moveSpecie
 )
 
-// GET OUT ALL ANIMALS FROM A SPECIE (EXCEPT THOSE IN CLINIC OR LOAN)
+// TAKE OUT ALL ANIMALS FROM A SPECIE (EXCEPT THOSE IN CLINIC OR LOAN)
 specieRouter.put(
 	'/api/species/:id/getout',
 	loggerMiddleware,

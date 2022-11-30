@@ -38,7 +38,7 @@ const getEnclosure = (
 ): void => {
 	enclosureModel
 		.findById(req.params.id)
-		.populate('zone')
+		.populate({ path: 'zone', select: 'name' })
 		.then(
 			(result): Response<any> =>
 				result
@@ -76,7 +76,7 @@ const updateEnclosure = (
 /**
  *		DELETE A ENCLOSURE
  */
-const deleteenclosure = (
+const deleteEnclosure = (
 	req: Request,
 	res: Response,
 	next: NextFunction
@@ -105,6 +105,7 @@ const getAllEnclosures = (
 ): void => {
 	enclosureModel
 		.find()
+		.populate({ path: 'zone', select: 'name' })
 		.then(
 			(result): Response<any> =>
 				result
@@ -121,6 +122,6 @@ export default {
 	createEnclosure,
 	getEnclosure,
 	updateEnclosure,
-	deleteenclosure,
+	deleteEnclosure,
 	getAllEnclosures,
 }

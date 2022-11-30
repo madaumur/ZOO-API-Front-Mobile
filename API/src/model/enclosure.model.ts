@@ -19,6 +19,6 @@ const enclosureSchema = new Schema<enclosureInterface>(
 	{ versionKey: false, timestamps: true }
 )
 
-const enclosureModel = model<enclosureInterface>('enclusure', enclosureSchema)
+const enclosureModel = model<enclosureInterface>('enclosure', enclosureSchema)
 
 export { enclosureModel, enclosureInterface }

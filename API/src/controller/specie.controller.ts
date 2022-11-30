@@ -36,7 +36,7 @@ const createSpecie = (
 const getSpecie = (req: Request, res: Response, next: NextFunction): void => {
 	specieModel
 		.findById(req.params.id)
-		//.populate({ path: 'enclosure', select: 'name' })
+		.populate({ path: 'enclosure', select: 'name zone' })
 		.then(
 			(result): Response<any> =>
 				result
@@ -103,6 +103,7 @@ const getAllSpecies = (
 ): void => {
 	specieModel
 		.find()
+		.populate({ path: 'enclosure', select: 'name zone' })
 		.then(
 			(result): Response<any> =>
 				result
@@ -148,7 +149,7 @@ const listAnimalFromSpecie = (
 }
 
 /**
- *		MOVE ALL ANIMAL FROM A SPECIE
+ *		MOVE ALL ANIMAL FROM A SPECIE ( EXCEPT THOSE IN THE BODY'S ARRAY )
  */
 const moveSpecie = (req: Request, res: Response, next: NextFunction): void => {
 	let futurePlace: number = urlToPosition(req.url)
@@ -175,11 +176,9 @@ const moveSpecie = (req: Request, res: Response, next: NextFunction): void => {
 							(resultAni): Response<any> =>
 								resultAni
 									? res.status(202).json(resultAni)
-									: res
-											.status(404)
-											.json({
-												error: 'Animals not found',
-											})
+									: res.status(404).json({
+											error: 'Animals not found',
+									  })
 						)
 				}
 			})
@@ -191,6 +190,7 @@ const moveSpecie = (req: Request, res: Response, next: NextFunction): void => {
 			)
 	}
 }
+
 export default {
 	createSpecie,
 	getSpecie,

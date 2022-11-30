@@ -18,10 +18,7 @@
 		"name": "Plage des tortues",
 		"zone": "australie",
 		"coordinates": "",
-		"surface": 1000,
-		"__t": "bassin",
-		"temperatureMini": 27,
-		"temperatureMaxi": 35
+		"surface": 1000
 	},
 	{
 		"_id": "foret-pandas",
@@ -63,10 +60,7 @@
 		"name": "Vivarium d'Amérique du Sud",
 		"zone": "amerique-sud",
 		"coordinates": "",
-		"surface": 1000,
-		"__t": "vivarium",
-		"temperature": 28,
-		"hygrometrie": 70
+		"surface": 1000
 	},
 	{
 		"_id": "voliere-amerique-sud",
@@ -87,10 +81,7 @@
 		"name": "Vivarium d'Afrique",
 		"zone": "desert-afrique",
 		"coordinates": "",
-		"surface": 1000,
-		"__t": "vivarium",
-		"temperature": 32,
-		"hygrometrie": 40
+		"surface": 1000
 	},
 	{
 		"_id": "plaine-bisons",
@@ -125,30 +116,21 @@
 		"name": "Banquise des ours",
 		"zone": "pole-nord",
 		"coordinates": "",
-		"surface": 1000,
-		"__t": "bassin",
-		"temperatureMini": 0,
-		"temperatureMaxi": 4
+		"surface": 1000
 	},
 	{
 		"_id": "banquise-manchots",
 		"name": "Banquise des manchots",
 		"zone": "pole-nord",
 		"coordinates": "",
-		"surface": 1000,
-		"__t": "bassin",
-		"temperatureMini": 0,
-		"temperatureMaxi": 4
+		"surface": 1000
 	},
 	{
 		"_id": "banquise-phoques",
 		"name": "Banquise des phoques",
 		"zone": "pole-nord",
 		"coordinates": "",
-		"surface": 1000,
-		"__t": "bassin",
-		"temperatureMini": 0,
-		"temperatureMaxi": 4
+		"surface": 1000
 	},
 	{
 		"_id": "plaine-afrique",

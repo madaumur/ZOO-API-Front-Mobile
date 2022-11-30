@@ -39,14 +39,14 @@ animalRouter.get(
 	animalController.getAllAnimals
 )
 
-// MOVE AN ANIMAL INSIDE
+// BRING IN AN ANIMAL
 animalRouter.post(
 	'/api/animals/:id/getin',
 	loggerMiddleware,
 	animalController.moveAnimal
 )
 
-// MOVE AN ANIMAL OUTSIDE
+// TAKE OUT AN ANIMAL
 animalRouter.post(
 	'/api/animals/:id/getout',
 	loggerMiddleware,

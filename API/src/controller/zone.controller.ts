@@ -41,23 +41,6 @@ const getZone = (req: Request, res: Response, next: NextFunction): void => {
 }
 
 /**
- *		GET ALL ZONES
- */
-const getAllZones = (req: Request, res: Response, next: NextFunction): void => {
-	zoneModel
-		.find()
-		.then((result) =>
-			result
-				? res.status(200).json(result)
-				: res.status(404).json({ error: 'Zones not found' })
-		)
-		.catch((error) => res.status(404).json({ error }))
-		.then((): void =>
-			logger.info(`[RES] code: ${res.statusCode} (${res.statusMessage})`)
-		)
-}
-
-/**
  *		UPDATE ONE ZONE
  */
 const updateZone = (req: Request, res: Response, next: NextFunction): void => {
@@ -91,10 +74,27 @@ const deleteZone = (req: Request, res: Response, next: NextFunction): void => {
 		)
 }
 
+/**
+ *		GET ALL ZONES
+ */
+const getAllZones = (req: Request, res: Response, next: NextFunction): void => {
+	zoneModel
+		.find()
+		.then((result) =>
+			result
+				? res.status(200).json(result)
+				: res.status(404).json({ error: 'Zones not found' })
+		)
+		.catch((error) => res.status(404).json({ error }))
+		.then((): void =>
+			logger.info(`[RES] code: ${res.statusCode} (${res.statusMessage})`)
+		)
+}
+
 export default {
 	createZone,
-	getAllZones,
 	getZone,
 	updateZone,
 	deleteZone,
+	getAllZones,
 }
