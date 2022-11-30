@@ -155,42 +155,41 @@ const moveSpecie = (req: Request, res: Response, next: NextFunction): void => {
 	let actualPlace: number = reversePosition(futurePlace)
 	let animalList: string[] = req.body
 
-	console.log(animalList)
-	specieModel
-		.findById(req.params.id)
-		.then((resultSpe) => {
-			if (!resultSpe) {
-				res.status(404).json({ error: 'Specie not found' })
-			} else {
-				res.status(200).json(resultSpe)
-				console.log('breakpoint 0')
-				animalModel
-					.find({
-						specie: resultSpe._id,
-						_id: { $nin: animalList },
-						position: actualPlace,
-					})
-					.then((resultAni) => {
-						console.log('breakpoint 1')
-						if (!resultAni) {
-							res.status(404).json({ error: 'Animals not found' })
-						} else {
-							res.status(200).json(resultAni)
-							animalModel
-								.updateMany({ $set: { position: futurePlace } })
-
-								.orFail()
-								.exec()
-							console.log('breakpoint 2')
-							res.status(202).json(resultAni)
-						}
-					})
-			}
-		})
-		.catch((error): Response<any> => res.status(404).json({ error }))
-		.then((): void =>
-			logger.info(`[RES] code: ${res.statusCode} (${res.statusMessage})`)
-		)
+	if (req.body) {
+		specieModel
+			.findById(req.params.id)
+			.then((resultSpe) => {
+				if (!resultSpe) {
+					res.status(404).json({ error: 'Specie not found' })
+				} else {
+					animalModel
+						.findOneAndUpdate(
+							{
+								specie: resultSpe._id,
+								_id: { $nin: animalList },
+								position: actualPlace,
+							},
+							{ $set: { position: futurePlace } }
+						)
+						.then(
+							(resultAni): Response<any> =>
+								resultAni
+									? res.status(202).json(resultAni)
+									: res
+											.status(404)
+											.json({
+												error: 'Animals not found',
+											})
+						)
+				}
+			})
+			.catch((error): Response<any> => res.status(404).json({ error }))
+			.then((): void =>
+				logger.info(
+					`[RES] code: ${res.statusCode} (${res.statusMessage})`
+				)
+			)
+	}
 }
 export default {
 	createSpecie,
