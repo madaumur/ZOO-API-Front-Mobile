@@ -31,5 +31,4 @@ EmployeeRouter.delete(
 	'/api/employees/:id',
     LoggerMiddleware,
 	//employeeController.deleteEmployee
-	//employeeController.deleteEmployeeById
 )
