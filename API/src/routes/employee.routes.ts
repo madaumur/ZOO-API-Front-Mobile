@@ -13,7 +13,7 @@ EmployeeRouter.post(
 )
 
 // GET AN EMPLOYEE
-EmployeeRouter.post(
+EmployeeRouter.get(
 	'/api/employees/:id',
 	LoggerMiddleware,
 	employeeController.getEmployee
@@ -22,13 +22,21 @@ EmployeeRouter.post(
 // UPDATE AN EMPLOYEE
 EmployeeRouter.put(
 	'/api/employees/:id',
-    LoggerMiddleware,
+	LoggerMiddleware
 	//employeeController.updateEmployee
 )
 
 // DELETE AN EMPLOYEE
 EmployeeRouter.delete(
 	'/api/employees/:id',
-    LoggerMiddleware,
+	LoggerMiddleware
 	//employeeController.deleteEmployee
 )
+
+// GET ALL EMPLOYEEs
+EmployeeRouter.get(
+	'/api/employees/',
+	LoggerMiddleware,
+	employeeController.getAllEmployees
+)
+export default EmployeeRouter

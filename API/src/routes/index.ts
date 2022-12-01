@@ -1,5 +1,6 @@
 import express from 'express'
 import AnimalRouter from './animal.routes'
+import EmployeeRouter from './employee.routes'
 import EnclosureRouter from './enclosure.routes'
 import SpecieRouter from './specie.routes'
 import ZoneRouter from './zone.routes'
@@ -12,5 +13,6 @@ router.use(AnimalRouter)
 router.use(SpecieRouter)
 router.use(EnclosureRouter)
 router.use(ZoneRouter)
+router.use(EmployeeRouter)
 
 export default router

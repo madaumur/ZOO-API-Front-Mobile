@@ -1,3 +1,4 @@
+import bcrypt from 'bcryptjs'
 import validator from 'validator'
 import { model, Schema } from 'mongoose'
 import { EmployeeInterface } from '../interface/employee.interface'
@@ -20,25 +21,33 @@ const EmployeeSchema = new Schema<EmployeeInterface>(
 		email: {
 			type: String,
 			required: [true, 'email is required'],
-			validate():void {
-				if (!validator.isEmail) throw new Error("email isn't correct")
+			validate(v: any): void {
+				if (!validator.isEmail(v))
+					throw new Error("email isn't correct")
 			},
 		},
 		password: {
 			type: String,
 			required: [true, 'password is required'],
-			validate(v : any):void {
-				if (!validator.isLength(v, {min :4})) throw new Error("password must be at least 4 characters")
+			validate(v: any): void {
+				if (!validator.isLength(v, { min: 4 }))
+					throw new Error('password must be at least 4 characters')
 			},
 		},
 		role: {
 			type: String,
-			required: [true, 'role is required'],
+			required: false,
 			enum: ['NONE', 'SOINEUR', 'VETERINAIRE', 'ADMIN'],
 		},
 	},
 	{ versionKey: false, timestamps: true }
 )
+
+EmployeeSchema.pre('save', async function () {
+	if (this.isModified('password')) {
+		this.password = await bcrypt.hash(this.password, 8)
+	}
+})
 
 const EmployeeModel = model<EmployeeInterface>('employee', EmployeeSchema)
 

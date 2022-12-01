@@ -48,7 +48,31 @@ const getEmployee = (req: Request, res: Response, next: NextFunction): void => {
 		)
 }
 
+/**
+ *		GET ALL EMPLOYEES
+ */
+const getAllEmployees = (
+	req: Request,
+	res: Response,
+	next: NextFunction
+): void => {
+	EmployeeModel.find()
+		.then(
+			(result): Response<any> =>
+				result
+					? res
+							.status(200)
+							.json({ message: 'Employees found', result })
+					: res.status(404).json({ error: 'Employees not found' })
+		)
+		.catch((error): Response<any> => res.status(500).json({ error }))
+		.then((): void =>
+			logger.info(`[RES] code: ${res.statusCode} (${res.statusMessage})`)
+		)
+}
+
 export default {
 	registerEmployee,
 	getEmployee,
+	getAllEmployees,
 }
