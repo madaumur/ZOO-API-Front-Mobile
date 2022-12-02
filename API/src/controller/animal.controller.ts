@@ -59,7 +59,9 @@ const updateAnimal = (
 		.then(
 			(result): Response<any> =>
 				result
-					? res.status(202).json({ message: 'Animal updated', result })
+					? res
+							.status(202)
+							.json({ message: 'Animal updated', result })
 					: res.status(404).json({ error: 'Animal not found' })
 		)
 		.catch((error): Response<any> => res.status(500).json({ error }))
@@ -80,7 +82,9 @@ const deleteAnimal = (
 		.then(
 			(result): Response<any> =>
 				result
-					? res.status(410).json({ message: 'Animal deleted', result })
+					? res
+							.status(410)
+							.json({ message: 'Animal deleted', result })
 					: res.status(404).json({ error: 'Animal not found' })
 		)
 		.catch((error): Response<any> => res.status(500).json({ error }))
@@ -115,7 +119,7 @@ const getAllAnimals = (
  *		MOVE AN ANIMAL
  */
 const moveAnimal = (req: Request, res: Response, next: NextFunction): void => {
-	let place: number = urlToPosition(req.url)
+	const place: number = urlToPosition(req.url)
 	AnimalModel.findById(req.params.id)
 		.then((result): void => {
 			if (!result) {

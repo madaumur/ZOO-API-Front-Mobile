@@ -1,6 +1,6 @@
 import express from 'express'
 import SpecieController from '../controller/specie.controller'
-import LoggerMiddleware from '../middleware/logger'
+import LoggerMiddleware from '../middleware/logger.middleware'
 
 const SpecieRouter: express.Router = express.Router()
 

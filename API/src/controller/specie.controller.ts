@@ -145,9 +145,9 @@ const listAnimalFromSpecie = (
  *		MOVE ALL ANIMAL FROM A SPECIE ( EXCEPT THOSE IN THE BODY'S ARRAY )
  */
 const moveSpecie = (req: Request, res: Response, next: NextFunction): void => {
-	let futurePlace: number = urlToPosition(req.url)
-	let actualPlace: number = reversePosition(futurePlace)
-	let animalList: string[] = req.body
+	const futurePlace: number = urlToPosition(req.url)
+	const actualPlace: number = reversePosition(futurePlace)
+	const animalList: string[] = req.body
 
 	if (req.body) {
 		SpecieModel.findById(req.params.id)

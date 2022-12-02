@@ -1,6 +1,6 @@
 import express from 'express'
 import ZoneController from '../controller/zone.controller'
-import LoggerMiddleware from '../middleware/logger'
+import LoggerMiddleware from '../middleware/logger.middleware'
 
 const ZoneRouter: express.Router = express.Router()
 

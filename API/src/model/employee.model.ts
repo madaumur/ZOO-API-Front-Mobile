@@ -34,6 +34,10 @@ const EmployeeSchema = new Schema<EmployeeInterface>(
 					throw new Error('password must be at least 4 characters')
 			},
 		},
+		passwordHash: {
+			type: String,
+			required: false,
+		},
 		role: {
 			type: String,
 			required: false,
@@ -45,7 +49,7 @@ const EmployeeSchema = new Schema<EmployeeInterface>(
 
 EmployeeSchema.pre('save', async function () {
 	if (this.isModified('password')) {
-		this.password = await bcrypt.hash(this.password, 8)
+		this.passwordHash = await bcrypt.hash(this.password, 8)
 	}
 })
 

@@ -7,6 +7,7 @@ interface EmployeeInterface extends Document {
 	birth_date?: Date
 	email: string
 	password: string
+	passwordHash: string
 	role: string /* 'NONE', 'SOINEUR', 'VETERINAIRE', 'ADMIN' */
 }
 

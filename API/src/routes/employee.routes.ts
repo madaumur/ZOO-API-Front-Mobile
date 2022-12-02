@@ -1,7 +1,7 @@
 import express from 'express'
 import employeeController from '../controller/employee.controller'
 
-import LoggerMiddleware from '../middleware/logger'
+import LoggerMiddleware from '../middleware/logger.middleware'
 
 const EmployeeRouter: express.Router = express.Router()
 
@@ -10,6 +10,13 @@ EmployeeRouter.post(
 	'/api/employees/register',
 	LoggerMiddleware,
 	employeeController.registerEmployee
+)
+
+// LOGIN AN EMPLOYEE
+EmployeeRouter.post(
+	'/api/employees/login',
+	LoggerMiddleware,
+	employeeController.loginEmployee
 )
 
 // GET AN EMPLOYEE

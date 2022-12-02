@@ -1,6 +1,6 @@
 import express from 'express'
 import EnclosureController from '../controller/enclosure.controller'
-import LoggerMiddleware from '../middleware/logger'
+import LoggerMiddleware from '../middleware/logger.middleware'
 
 const EnclosureRouter: express.Router = express.Router()
 
