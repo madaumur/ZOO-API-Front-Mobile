@@ -1,6 +1,6 @@
 import { Document } from 'mongoose'
 
-interface enclosureInterface extends Document {
+interface EnclosureInterface extends Document {
 	_id: string
 	name: string
 	zone: object
@@ -8,4 +8,4 @@ interface enclosureInterface extends Document {
 	surface: number
 }
 
-export { enclosureInterface }
+export { EnclosureInterface }

@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
-import { animalModel } from '../model/animal.model'
-import { specieModel, specieInterface } from '../model/specie.model'
+import { AnimalModel } from '../model/animal.model'
+import { SpecieModel, SpecieInterface } from '../model/specie.model'
 import { urlToPosition, reversePosition } from '../utils/function'
 import logger from '../utils/logger'
 
@@ -12,8 +12,8 @@ const createSpecie = (
 	res: Response,
 	next: NextFunction
 ): void => {
-	const specieData: specieInterface = req.body
-	const specie = new specieModel({
+	const specieData: SpecieInterface = req.body
+	const specie = new SpecieModel({
 		...specieData,
 	})
 
@@ -34,8 +34,7 @@ const createSpecie = (
  *		GET ONE SPECIE
  */
 const getSpecie = (req: Request, res: Response, next: NextFunction): void => {
-	specieModel
-		.findById(req.params.id)
+	SpecieModel.findById(req.params.id)
 		.populate({ path: 'enclosure', select: 'name zone' })
 		.then(
 			(result): Response<any> =>
@@ -57,8 +56,7 @@ const updateSpecie = (
 	res: Response,
 	next: NextFunction
 ): void => {
-	specieModel
-		.findByIdAndUpdate(req.params.id, req.body)
+	SpecieModel.findByIdAndUpdate(req.params.id, req.body)
 		.then(
 			(result): Response<any> =>
 				result
@@ -79,8 +77,7 @@ const deleteSpecie = (
 	res: Response,
 	next: NextFunction
 ): void => {
-	specieModel
-		.findByIdAndDelete(req.params.id)
+	SpecieModel.findByIdAndDelete(req.params.id)
 		.then(
 			(result): Response<any> =>
 				result
@@ -101,8 +98,7 @@ const getAllSpecies = (
 	res: Response,
 	next: NextFunction
 ): void => {
-	specieModel
-		.find()
+	SpecieModel.find()
 		.populate({ path: 'enclosure', select: 'name zone' })
 		.then(
 			(result): Response<any> =>
@@ -124,22 +120,19 @@ const listAnimalFromSpecie = (
 	res: Response,
 	next: NextFunction
 ): void => {
-	specieModel
-		.findById(req.params.id)
+	SpecieModel.findById(req.params.id)
 		.then((result): void => {
 			if (!result) {
 				res.status(404).json({ error: 'Specie not found' })
 			} else {
-				animalModel
-					.find({ specie: result._id })
-					.then(
-						(result): Response<any> =>
-							result
-								? res.status(200).json(result)
-								: res
-										.status(404)
-										.json({ error: 'Animals not found' })
-					)
+				AnimalModel.find({ specie: result._id }).then(
+					(result): Response<any> =>
+						result
+							? res.status(200).json(result)
+							: res
+									.status(404)
+									.json({ error: 'Animals not found' })
+				)
 			}
 		})
 		.catch((error): Response<any> => res.status(404).json({ error }))
@@ -152,34 +145,31 @@ const listAnimalFromSpecie = (
  *		MOVE ALL ANIMAL FROM A SPECIE ( EXCEPT THOSE IN THE BODY'S ARRAY )
  */
 const moveSpecie = (req: Request, res: Response, next: NextFunction): void => {
-	let futurePlace: number = urlToPosition(req.url)
-	let actualPlace: number = reversePosition(futurePlace)
-	let animalList: string[] = req.body
+	const futurePlace: number = urlToPosition(req.url)
+	const actualPlace: number = reversePosition(futurePlace)
+	const animalList: string[] = req.body
 
 	if (req.body) {
-		specieModel
-			.findById(req.params.id)
+		SpecieModel.findById(req.params.id)
 			.then((resultSpe) => {
 				if (!resultSpe) {
 					res.status(404).json({ error: 'Specie not found' })
 				} else {
-					animalModel
-						.findOneAndUpdate(
-							{
-								specie: resultSpe._id,
-								_id: { $nin: animalList },
-								position: actualPlace,
-							},
-							{ $set: { position: futurePlace } }
-						)
-						.then(
-							(resultAni): Response<any> =>
-								resultAni
-									? res.status(202).json(resultAni)
-									: res.status(404).json({
-											error: 'Animals not found',
-									  })
-						)
+					AnimalModel.findOneAndUpdate(
+						{
+							specie: resultSpe._id,
+							_id: { $nin: animalList },
+							position: actualPlace,
+						},
+						{ $set: { position: futurePlace } }
+					).then(
+						(resultAni): Response<any> =>
+							resultAni
+								? res.status(202).json(resultAni)
+								: res.status(404).json({
+										error: 'Animals not found',
+								  })
+					)
 				}
 			})
 			.catch((error): Response<any> => res.status(404).json({ error }))

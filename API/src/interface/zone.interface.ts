@@ -1,8 +1,8 @@
 import { Document } from 'mongoose'
 
-interface zoneInterface extends Document {
+interface ZoneInterface extends Document {
 	_id: string
 	name: string
 }
 
-export { zoneInterface }
+export { ZoneInterface }

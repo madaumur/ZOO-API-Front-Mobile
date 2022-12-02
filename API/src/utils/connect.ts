@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 import config from 'config'
 import logger from './logger'
 
-async function connect(): Promise<void> {
+export async function connect(): Promise<void> {
 	const dbUri: string = config.get<string>('mongo_uri')
 
 	try {
@@ -13,5 +13,3 @@ async function connect(): Promise<void> {
 		process.exit(1)
 	}
 }
-
-export default connect

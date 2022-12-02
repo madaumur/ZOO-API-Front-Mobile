@@ -1,42 +1,42 @@
 import express from 'express'
-import enclosureController from '../controller/enclosure.controller'
-import loggerMiddleware from '../middleware/logger'
+import EnclosureController from '../controller/enclosure.controller'
+import LoggerMiddleware from '../middleware/logger.middleware'
 
-const enclosureRouter: express.Router = express.Router()
+const EnclosureRouter: express.Router = express.Router()
 
 // CREATE AN ENCLOSURE
-enclosureRouter.post(
+EnclosureRouter.post(
 	'/api/Enclosures/new',
-	loggerMiddleware,
-	enclosureController.createEnclosure
+	LoggerMiddleware,
+	EnclosureController.createEnclosure
 )
 
 // GET AN ENCLOSURE BY ID
-enclosureRouter.get(
+EnclosureRouter.get(
 	'/api/Enclosures/:id',
-	loggerMiddleware,
-	enclosureController.getEnclosure
+	LoggerMiddleware,
+	EnclosureController.getEnclosure
 )
 
 // UPDATE AN ENCLOSURE BY ID
-enclosureRouter.put(
+EnclosureRouter.put(
 	'/api/Enclosures/:id',
-	loggerMiddleware,
-	enclosureController.updateEnclosure
+	LoggerMiddleware,
+	EnclosureController.updateEnclosure
 )
 
 // DELETE AN ENCLOSURE BY ID
-enclosureRouter.delete(
+EnclosureRouter.delete(
 	'/api/Enclosures/:id',
-	loggerMiddleware,
-	enclosureController.deleteEnclosure
+	LoggerMiddleware,
+	EnclosureController.deleteEnclosure
 )
 
 // GET ALL ENCLOSURE
-enclosureRouter.get(
+EnclosureRouter.get(
 	'/api/enclosures/',
-	loggerMiddleware,
-	enclosureController.getAllEnclosures
+	LoggerMiddleware,
+	EnclosureController.getAllEnclosures
 )
 
-export default enclosureRouter
+export default EnclosureRouter

@@ -1,7 +1,7 @@
 import { model, Schema } from 'mongoose'
-import { zoneInterface } from '../interface/zone.interface'
+import { ZoneInterface } from '../interface/zone.interface'
 
-const zoneSchema = new Schema<zoneInterface>(
+const ZoneSchema = new Schema<ZoneInterface>(
 	{
 		_id: {
 			type: String,
@@ -12,6 +12,6 @@ const zoneSchema = new Schema<zoneInterface>(
 	{ versionKey: false, timestamps: true }
 )
 
-const zoneModel = model<zoneInterface>('zone', zoneSchema)
+const ZoneModel = model<ZoneInterface>('zone', ZoneSchema)
 
-export { zoneModel, zoneInterface }
+export { ZoneModel, ZoneInterface }

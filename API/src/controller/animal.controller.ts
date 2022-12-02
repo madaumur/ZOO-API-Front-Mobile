@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
-import { animalModel, animalInterface } from '../model/animal.model'
+import { AnimalModel, AnimalInterface } from '../model/animal.model'
 import { urlToPosition } from '../utils/function'
 import logger from '../utils/logger'
 
@@ -11,15 +11,15 @@ const createAnimal = (
 	res: Response,
 	next: NextFunction
 ): void => {
-	const animalData: animalInterface = req.body
-	const animal = new animalModel({
+	const animalData: AnimalInterface = req.body
+	const animal = new AnimalModel({
 		...animalData,
 	})
 
 	animal
 		.save()
-		.then((animal): void => {
-			res.status(201).json({ message: 'New animal registered', animal })
+		.then((result): void => {
+			res.status(201).json({ message: 'Animal created', result })
 		})
 		.catch((error): void => {
 			res.status(400).json({ error })
@@ -33,13 +33,12 @@ const createAnimal = (
  *		GET ONE ANIMAL
  */
 const getAnimal = (req: Request, res: Response, next: NextFunction): void => {
-	animalModel
-		.findById(req.params.id)
+	AnimalModel.findById(req.params.id)
 		.populate({ path: 'specie', select: 'name enclosure' })
 		.then(
 			(result): Response<any> =>
 				result
-					? res.status(200).json(result)
+					? res.status(200).json({ message: 'Animal found', result })
 					: res.status(404).json({ error: 'Animal not found' })
 		)
 		.catch((error): Response<any> => res.status(500).json({ error }))
@@ -56,12 +55,13 @@ const updateAnimal = (
 	res: Response,
 	next: NextFunction
 ): void => {
-	animalModel
-		.findByIdAndUpdate(req.params.id, req.body)
+	AnimalModel.findByIdAndUpdate(req.params.id, req.body)
 		.then(
 			(result): Response<any> =>
 				result
-					? res.status(202).json(result)
+					? res
+							.status(202)
+							.json({ message: 'Animal updated', result })
 					: res.status(404).json({ error: 'Animal not found' })
 		)
 		.catch((error): Response<any> => res.status(500).json({ error }))
@@ -78,12 +78,13 @@ const deleteAnimal = (
 	res: Response,
 	next: NextFunction
 ): void => {
-	animalModel
-		.findByIdAndDelete(req.params.id)
+	AnimalModel.findByIdAndDelete(req.params.id)
 		.then(
 			(result): Response<any> =>
 				result
-					? res.status(410).json(result)
+					? res
+							.status(410)
+							.json({ message: 'Animal deleted', result })
 					: res.status(404).json({ error: 'Animal not found' })
 		)
 		.catch((error): Response<any> => res.status(500).json({ error }))
@@ -100,13 +101,12 @@ const getAllAnimals = (
 	res: Response,
 	next: NextFunction
 ): void => {
-	animalModel
-		.find()
+	AnimalModel.find()
 		.populate({ path: 'specie', select: 'name enclosure' })
 		.then(
 			(result): Response<any> =>
 				result
-					? res.status(200).json(result)
+					? res.status(200).json({ message: 'Animals found', result })
 					: res.status(404).json({ error: 'Animals not found' })
 		)
 		.catch((error): Response<any> => res.status(404).json({ error }))
@@ -119,53 +119,60 @@ const getAllAnimals = (
  *		MOVE AN ANIMAL
  */
 const moveAnimal = (req: Request, res: Response, next: NextFunction): void => {
-	let place: number = urlToPosition(req.url)
-	animalModel
-		.findById(req.params.id)
+	const place: number = urlToPosition(req.url)
+	AnimalModel.findById(req.params.id)
 		.then((result): void => {
 			if (!result) {
 				res.status(404).json({ error: 'Animal not found' })
 			} else {
 				switch (place) {
 					case 0:
-						animalModel
-							.updateOne(
-								{ _id: req.params.id },
-								{ $set: { position: 0 } }
-							)
+						AnimalModel.updateOne(
+							{ _id: req.params.id },
+							{ $set: { position: 0 } }
+						)
 							.orFail()
 							.exec()
-						res.status(202).json(result)
+						res.status(202).json({
+							message: 'Animal is now outside',
+							result,
+						})
 						break
 					case 1:
-						animalModel
-							.updateOne(
-								{ _id: req.params.id },
-								{ $set: { position: 1 } }
-							)
+						AnimalModel.updateOne(
+							{ _id: req.params.id },
+							{ $set: { position: 1 } }
+						)
 							.orFail()
 							.exec()
-						res.status(202).json(result)
+						res.status(202).json({
+							message: 'Animal is now inside',
+							result,
+						})
 						break
 					case 2:
-						animalModel
-							.updateOne(
-								{ _id: req.params.id },
-								{ $set: { position: 2 } }
-							)
+						AnimalModel.updateOne(
+							{ _id: req.params.id },
+							{ $set: { position: 2 } }
+						)
 							.orFail()
 							.exec()
-						res.status(202).json(result)
+						res.status(202).json({
+							message: 'Animal is now in the clinic',
+							result,
+						})
 						break
 					case 3:
-						animalModel
-							.updateOne(
-								{ _id: req.params.id },
-								{ $set: { position: 3 } }
-							)
+						AnimalModel.updateOne(
+							{ _id: req.params.id },
+							{ $set: { position: 3 } }
+						)
 							.orFail()
 							.exec()
-						res.status(202).json(result)
+						res.status(202).json({
+							message: 'Animal is now on loan',
+							result,
+						})
 						break
 					default:
 						res.status(400).json({ error: 'Bad request' })

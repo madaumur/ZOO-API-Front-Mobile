@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
-import { enclosureModel, enclosureInterface } from '../model/enclosure.model'
+import { EnclosureModel, EnclosureInterface } from '../model/enclosure.model'
 import logger from '../utils/logger'
 
 /**
@@ -10,8 +10,8 @@ const createEnclosure = (
 	res: Response,
 	next: NextFunction
 ): void => {
-	const enclosureData: enclosureInterface = req.body
-	const enclosure = new enclosureModel({
+	const enclosureData: EnclosureInterface = req.body
+	const enclosure = new EnclosureModel({
 		...enclosureData,
 	})
 
@@ -36,8 +36,7 @@ const getEnclosure = (
 	res: Response,
 	next: NextFunction
 ): void => {
-	enclosureModel
-		.findById(req.params.id)
+	EnclosureModel.findById(req.params.id)
 		.populate({ path: 'zone', select: 'name' })
 		.then(
 			(result): Response<any> =>
@@ -59,8 +58,7 @@ const updateEnclosure = (
 	res: Response,
 	next: NextFunction
 ): void => {
-	enclosureModel
-		.findByIdAndUpdate(req.params.id, req.body)
+	EnclosureModel.findByIdAndUpdate(req.params.id, req.body)
 		.then(
 			(result): Response<any> =>
 				result
@@ -81,8 +79,7 @@ const deleteEnclosure = (
 	res: Response,
 	next: NextFunction
 ): void => {
-	enclosureModel
-		.findByIdAndDelete(req.params.id)
+	EnclosureModel.findByIdAndDelete(req.params.id)
 		.then(
 			(result): Response<any> =>
 				result
@@ -103,8 +100,7 @@ const getAllEnclosures = (
 	res: Response,
 	next: NextFunction
 ): void => {
-	enclosureModel
-		.find()
+	EnclosureModel.find()
 		.populate({ path: 'zone', select: 'name' })
 		.then(
 			(result): Response<any> =>

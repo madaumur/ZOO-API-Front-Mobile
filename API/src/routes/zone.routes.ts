@@ -1,22 +1,22 @@
 import express from 'express'
-import zoneController from '../controller/zone.controller'
-import loggerMiddleware from '../middleware/logger'
+import ZoneController from '../controller/zone.controller'
+import LoggerMiddleware from '../middleware/logger.middleware'
 
-const zoneRouter: express.Router = express.Router()
+const ZoneRouter: express.Router = express.Router()
 
 // CREATE A ZONE
-zoneRouter.post('/api/zones/new', loggerMiddleware, zoneController.createZone)
+ZoneRouter.post('/api/zones/new', LoggerMiddleware, ZoneController.createZone)
 
 // GET A ZONE BY ID
-zoneRouter.get('/api/zones/:id', loggerMiddleware, zoneController.getZone)
+ZoneRouter.get('/api/zones/:id', LoggerMiddleware, ZoneController.getZone)
 
 // UPDATE A ZONE BY ID
-zoneRouter.put('/api/zones/:id', loggerMiddleware, zoneController.updateZone)
+ZoneRouter.put('/api/zones/:id', LoggerMiddleware, ZoneController.updateZone)
 
 // DELETE A ZONE BY ID
-zoneRouter.delete('/api/zones/:id', loggerMiddleware, zoneController.deleteZone)
+ZoneRouter.delete('/api/zones/:id', LoggerMiddleware, ZoneController.deleteZone)
 
 // GET ALL ZONE
-zoneRouter.get('/api/zones/', loggerMiddleware, zoneController.getAllZones)
+ZoneRouter.get('/api/zones/', LoggerMiddleware, ZoneController.getAllZones)
 
-export default zoneRouter
+export default ZoneRouter
