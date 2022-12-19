@@ -1,5 +1,6 @@
 import { model, Schema } from 'mongoose'
-import { SpecieInterface } from '../interface/specie.interface'
+
+import SpecieInterface from '../interface/specie.interface'
 
 const SpecieSchema = new Schema<SpecieInterface>(
 	{
@@ -22,4 +23,4 @@ const SpecieSchema = new Schema<SpecieInterface>(
 
 const SpecieModel = model<SpecieInterface>('specie', SpecieSchema)
 
-export { SpecieModel, SpecieInterface }
+export default SpecieModel

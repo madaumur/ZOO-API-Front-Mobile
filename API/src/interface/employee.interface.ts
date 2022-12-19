@@ -1,6 +1,6 @@
 import { Date, Document } from 'mongoose'
 
-interface EmployeeInterface extends Document {
+export default interface EmployeeInterface extends Document {
 	_id: string
 	first_name: string
 	last_name: string
@@ -9,6 +9,7 @@ interface EmployeeInterface extends Document {
 	password: string
 	passwordHash: string
 	role: string /* 'NONE', 'SOINEUR', 'VETERINAIRE', 'ADMIN' */
-}
+	authTokens: [authToken: string]
 
-export { EmployeeInterface }
+	generateAuthTokenandSave():Promise<void>
+}

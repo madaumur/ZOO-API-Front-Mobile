@@ -1,6 +1,6 @@
 import { Document } from 'mongoose'
 
-interface SpecieInterface extends Document {
+export default interface SpecieInterface extends Document {
 	_id: string
 	name: string
 	sociable: boolean
@@ -8,5 +8,3 @@ interface SpecieInterface extends Document {
 	dangerous: boolean
 	enclosure: object
 }
-
-export { SpecieInterface }

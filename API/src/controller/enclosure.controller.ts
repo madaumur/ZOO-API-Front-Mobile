@@ -1,5 +1,8 @@
 import { Request, Response, NextFunction } from 'express'
-import { EnclosureModel, EnclosureInterface } from '../model/enclosure.model'
+
+import EnclosureInterface from '../interface/enclosure.interface'
+import EnclosureModel from '../model/enclosure.model'
+
 import logger from '../utils/logger'
 
 /**

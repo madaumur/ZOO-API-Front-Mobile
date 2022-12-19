@@ -1,0 +1,30 @@
+[
+	{
+		"_id": "manu",
+		"first_name": "Emmanuel",
+		"last_name": "Mancroose",
+		"email": "mamnum@test.com",
+		"password": "leader"
+	},
+	{
+		"_id": "brig",
+		"first_name": "Brigitte",
+		"last_name": "Mancroose",
+		"email": "brigm@test.com",
+		"password": "oups"
+	},
+	{
+		"_id": "babeth",
+		"first_name": "Elisabeth",
+		"last_name": "Biorg",
+		"email": "elib@test.com",
+		"password": "prems"
+	},
+	{
+		"_id": "vlad",
+		"first_name": "Vladimir",
+		"last_name": "Poutrelle",
+		"email": "vladp@test.com",
+		"password": "russia"
+	}
+]

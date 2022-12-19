@@ -1,49 +1,51 @@
 import express from 'express'
-import employeeController from '../controller/employee.controller'
+import EmployeeController from '../controller/employee.controller'
 
-import LoggerMiddleware from '../middleware/logger.middleware'
+import Logger from '../middleware/log.middleware'
+import { Authentifaction } from '../middleware/auth.middleware'
 
 const EmployeeRouter: express.Router = express.Router()
 
 // REGISTER AN EMPLOYEE
 EmployeeRouter.post(
 	'/api/employees/register',
-	LoggerMiddleware,
-	employeeController.registerEmployee
+	Logger,
+	EmployeeController.registerEmployee
 )
 
 // LOGIN AN EMPLOYEE
 EmployeeRouter.post(
 	'/api/employees/login',
-	LoggerMiddleware,
-	employeeController.loginEmployee
+	Logger,
+	EmployeeController.loginEmployee
 )
 
 // GET AN EMPLOYEE
 EmployeeRouter.get(
 	'/api/employees/:id',
-	LoggerMiddleware,
-	employeeController.getEmployee
+	Logger,
+	Authentifaction,
+	EmployeeController.getEmployee
 )
 
 // UPDATE AN EMPLOYEE
 EmployeeRouter.put(
 	'/api/employees/:id',
-	LoggerMiddleware
-	//employeeController.updateEmployee
+	Logger,
+	EmployeeController.updateEmployee
 )
 
 // DELETE AN EMPLOYEE
 EmployeeRouter.delete(
 	'/api/employees/:id',
-	LoggerMiddleware
-	//employeeController.deleteEmployee
+	Logger,
+	EmployeeController.deleteEmployee
 )
 
 // GET ALL EMPLOYEEs
 EmployeeRouter.get(
 	'/api/employees/',
-	LoggerMiddleware,
-	employeeController.getAllEmployees
+	Logger,
+	EmployeeController.getAllEmployees
 )
 export default EmployeeRouter

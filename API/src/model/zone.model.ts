@@ -1,5 +1,6 @@
 import { model, Schema } from 'mongoose'
-import { ZoneInterface } from '../interface/zone.interface'
+
+import ZoneInterface from '../interface/zone.interface'
 
 const ZoneSchema = new Schema<ZoneInterface>(
 	{
@@ -14,4 +15,4 @@ const ZoneSchema = new Schema<ZoneInterface>(
 
 const ZoneModel = model<ZoneInterface>('zone', ZoneSchema)
 
-export { ZoneModel, ZoneInterface }
+export default ZoneModel

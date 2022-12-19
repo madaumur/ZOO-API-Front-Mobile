@@ -1,5 +1,8 @@
 import { Request, Response, NextFunction } from 'express'
-import { ZoneModel, ZoneInterface } from '../model/zone.model'
+
+import ZoneInterface from '../interface/zone.interface'
+import ZoneModel from '../model/zone.model'
+
 import logger from '../utils/logger'
 
 /**
@@ -27,8 +30,7 @@ const createZone = (req: Request, res: Response, next: NextFunction): void => {
  *		GET ONE ZONE
  */
 const getZone = (req: Request, res: Response, next: NextFunction): void => {
-	ZoneModel
-		.findById(req.params.id)
+	ZoneModel.findById(req.params.id)
 		.then((result) =>
 			result
 				? res.status(200).json(result)
@@ -44,8 +46,7 @@ const getZone = (req: Request, res: Response, next: NextFunction): void => {
  *		UPDATE ONE ZONE
  */
 const updateZone = (req: Request, res: Response, next: NextFunction): void => {
-	ZoneModel
-		.findByIdAndUpdate(req.params.id, req.body)
+	ZoneModel.findByIdAndUpdate(req.params.id, req.body)
 		.then((result) =>
 			result
 				? res.status(202).json(result)
@@ -61,8 +62,7 @@ const updateZone = (req: Request, res: Response, next: NextFunction): void => {
  *		DELETE A ZONE
  */
 const deleteZone = (req: Request, res: Response, next: NextFunction): void => {
-	ZoneModel
-		.findByIdAndDelete(req.params.id)
+	ZoneModel.findByIdAndDelete(req.params.id)
 		.then((result) =>
 			result
 				? res.status(410).json(result)
@@ -78,8 +78,7 @@ const deleteZone = (req: Request, res: Response, next: NextFunction): void => {
  *		GET ALL ZONES
  */
 const getAllZones = (req: Request, res: Response, next: NextFunction): void => {
-	ZoneModel
-		.find()
+	ZoneModel.find()
 		.then((result) =>
 			result
 				? res.status(200).json(result)

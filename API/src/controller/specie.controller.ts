@@ -1,6 +1,9 @@
 import { Request, Response, NextFunction } from 'express'
-import { AnimalModel } from '../model/animal.model'
-import { SpecieModel, SpecieInterface } from '../model/specie.model'
+
+import SpecieInterface from '../interface/specie.interface'
+import SpecieModel from '../model/specie.model'
+import AnimalModel from '../model/animal.model'
+
 import { urlToPosition, reversePosition } from '../utils/function'
 import logger from '../utils/logger'
 

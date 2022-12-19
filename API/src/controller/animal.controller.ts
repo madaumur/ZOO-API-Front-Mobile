@@ -1,5 +1,8 @@
 import { Request, Response, NextFunction } from 'express'
-import { AnimalModel, AnimalInterface } from '../model/animal.model'
+
+import AnimalInterface from '../interface/animal.interface'
+import AnimalModel from '../model/animal.model'
+
 import { urlToPosition } from '../utils/function'
 import logger from '../utils/logger'
 
@@ -102,7 +105,7 @@ const getAllAnimals = (
 	next: NextFunction
 ): void => {
 	AnimalModel.find()
-		.populate({ path: 'specie', select: 'name enclosure' })
+		//.populate({ path: 'specie', select: 'name enclosure' })
 		.then(
 			(result): Response<any> =>
 				result
