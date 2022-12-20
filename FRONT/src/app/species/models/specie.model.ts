@@ -4,5 +4,5 @@ export class Specie {
 	sociable!: boolean
 	observations!: string
 	dangerous!: boolean
-	enclosure!: string
+	enclosure?: string
 }

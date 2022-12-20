@@ -12,12 +12,12 @@ import { SpeciesService } from '../services/species.service'
 
 @Injectable()
 export class SpeciesResolver implements Resolve<Specie[]> {
-	constructor(private specieService: SpeciesService) {}
+	constructor(private speciesService: SpeciesService) {}
 
 	resolve(
 		route: ActivatedRouteSnapshot,
 		state: RouterStateSnapshot
 	): Observable<Specie[]> {
-		return this.specieService.getSpecies()
+		return this.speciesService.getSpecies()
 	}
 }

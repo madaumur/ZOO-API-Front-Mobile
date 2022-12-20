@@ -10,6 +10,7 @@ export class SpeciesService {
 	constructor(private http: HttpClient) {}
 
 	getSpecies(): Observable<Specie[]> {
+		console.log(`${environment.apiUrl}/species`)
 		return this.http.get<Specie[]>(`${environment.apiUrl}/species`)
 	}
 
