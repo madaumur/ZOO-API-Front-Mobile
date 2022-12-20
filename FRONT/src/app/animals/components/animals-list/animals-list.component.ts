@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router'
 import { Observable, map } from 'rxjs'
 
 import { Animal } from '../../models/animal.model'
-import { AnimalsService } from '../../services/animals.service'
 
 @Component({
 	selector: 'app-animals-list',
