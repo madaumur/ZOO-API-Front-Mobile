@@ -4,7 +4,6 @@ import config from 'config'
 import { connect } from './utils/connect'
 import logger from './utils/logger'
 import router from './routes'
-import cors from 'cors'
 
 const port: number = config.get<number>('port')
 

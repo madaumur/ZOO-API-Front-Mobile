@@ -7,9 +7,14 @@ import { AnimalsListItemComponent } from './components/animals-list-item/animals
 import { AnimalsService } from './services/animals.service'
 import { AnimalsResolver } from './resolvers/animals.resolver'
 import { SharedModule } from '../shared/shared.module'
+import { SingleAnimalComponent } from './components/single-animal/single-animal.component'
 
 @NgModule({
-	declarations: [AnimalsListComponent, AnimalsListItemComponent],
+	declarations: [
+		AnimalsListComponent,
+		AnimalsListItemComponent,
+		SingleAnimalComponent,
+	],
 	imports: [CommonModule, AnimalsRoutingModule, SharedModule],
 	providers: [AnimalsService, AnimalsResolver],
 })

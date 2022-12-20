@@ -1,0 +1,15 @@
+<mat-card *ngIf="animals$ | async as animal">
+	<mat-card-header class="animal-header">
+		<mat-card-title>
+			name : {{ animal.name | uppercase }} ({{ animal.sex | uppercase }})
+		</mat-card-title>
+		<mat-card-subtitle>
+			specie : {{ animal.specie.name | titlecase }}
+		</mat-card-subtitle>
+	</mat-card-header>
+	<mat-divider></mat-divider>
+	<mat-card-content class="animal-content">
+		enclosure : {{ animal.specie.enclosure | titlecase }} <br />
+		actual pos: {{ animal.position }} <br /><br />
+	</mat-card-content>
+</mat-card>
