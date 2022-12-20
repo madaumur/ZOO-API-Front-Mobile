@@ -7,6 +7,7 @@ import { Animal } from '../models/animal.model'
 
 @Injectable()
 export class AnimalsService {
+
 	constructor(private http: HttpClient) {}
 
 	getAnimals(): Observable<Animal[]> {

@@ -1,4 +1,8 @@
-$primary-color: #d6d6d6;
+@import 'src/colors';
+
+header {
+	background-color: $darkgrey-accent;
+}
 
 ul {
 	list-style: none;

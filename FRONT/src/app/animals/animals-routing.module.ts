@@ -7,7 +7,7 @@ const routes: Routes = [
 	{
 		path: '',
 		component: AnimalsListComponent,
-		resolve: { posts: AnimalsResolver },
+		resolve: { animals: AnimalsResolver },
 	},
 ]
 

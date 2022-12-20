@@ -109,7 +109,7 @@ const getAllAnimals = (
 		.then(
 			(result): Response<any> =>
 				result
-					? res.status(200).json({ message: 'Animals found', result })
+					? res.status(200).json(result)
 					: res.status(404).json({ error: 'Animals not found' })
 		)
 		.catch((error): Response<any> => res.status(404).json({ error }))

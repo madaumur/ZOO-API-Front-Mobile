@@ -13,12 +13,9 @@ import { AnimalsService } from '../../services/animals.service'
 export class AnimalsListComponent implements OnInit {
 	animals$!: Observable<Animal[]>
 
-	constructor(
-		private route: ActivatedRoute,
-		private animalsService: AnimalsService
-	) {}
+	constructor(private route: ActivatedRoute) {}
 
 	ngOnInit(): void {
-		//this.animals$ = this.route.data.pipe(map((data) => data['data.result']))
+		this.animals$ = this.route.data.pipe(map((data) => data['animals']))
 	}
 }
