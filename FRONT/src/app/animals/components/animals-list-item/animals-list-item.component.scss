@@ -1,6 +1,6 @@
 @import 'src/colors';
 
-.animal-card {
+.card {
 	box-sizing: border-box;
 	width: 80%;
 	margin: 10px auto;
@@ -10,5 +10,12 @@
 
 	h2 {
 		margin: 0px;
+	}
+
+	:hover {
+		transition: 0.5s;
+		padding: 5px;
+		text-decoration: underline;
+		cursor: pointer;
 	}
 }
