@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import logger from '../utils/logger'
 
-function LoggerMiddleware(
+export default function Logger(
 	req: Request,
 	res: Response,
 	next: NextFunction
@@ -9,5 +9,3 @@ function LoggerMiddleware(
 	logger.info(`[REQ] ${req.method} on ${req.originalUrl} | data: ${req.body}`)
 	next()
 }
-
-export default LoggerMiddleware

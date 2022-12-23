@@ -1,0 +1,26 @@
+@import 'src/colors';
+
+header {
+	background-color: $darkgrey-accent;
+}
+
+ul {
+	list-style: none;
+	display: inline-block;
+}
+
+li {
+	display: inline-block;
+	padding-right: 30px;
+
+	a {
+		margin: 0 10px;
+		color: $primary-color;
+		text-decoration: none;
+
+		&:hover {
+			text-decoration: underline;
+			cursor: pointer;
+		}
+	}
+}

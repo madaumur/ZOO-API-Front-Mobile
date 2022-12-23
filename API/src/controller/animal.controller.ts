@@ -1,5 +1,8 @@
 import { Request, Response, NextFunction } from 'express'
-import { AnimalModel, AnimalInterface } from '../model/animal.model'
+
+import AnimalInterface from '../interface/animal.interface'
+import AnimalModel from '../model/animal.model'
+
 import { urlToPosition } from '../utils/function'
 import logger from '../utils/logger'
 
@@ -19,7 +22,7 @@ const createAnimal = (
 	animal
 		.save()
 		.then((result): void => {
-			res.status(201).json({ message: 'Animal created', result })
+			res.status(201).json(result)
 		})
 		.catch((error): void => {
 			res.status(400).json({ error })
@@ -38,7 +41,7 @@ const getAnimal = (req: Request, res: Response, next: NextFunction): void => {
 		.then(
 			(result): Response<any> =>
 				result
-					? res.status(200).json({ message: 'Animal found', result })
+					? res.status(200).json(result)
 					: res.status(404).json({ error: 'Animal not found' })
 		)
 		.catch((error): Response<any> => res.status(500).json({ error }))
@@ -59,9 +62,7 @@ const updateAnimal = (
 		.then(
 			(result): Response<any> =>
 				result
-					? res
-							.status(202)
-							.json({ message: 'Animal updated', result })
+					? res.status(202).json(result)
 					: res.status(404).json({ error: 'Animal not found' })
 		)
 		.catch((error): Response<any> => res.status(500).json({ error }))
@@ -82,9 +83,7 @@ const deleteAnimal = (
 		.then(
 			(result): Response<any> =>
 				result
-					? res
-							.status(410)
-							.json({ message: 'Animal deleted', result })
+					? res.status(410).json(result)
 					: res.status(404).json({ error: 'Animal not found' })
 		)
 		.catch((error): Response<any> => res.status(500).json({ error }))
@@ -106,7 +105,7 @@ const getAllAnimals = (
 		.then(
 			(result): Response<any> =>
 				result
-					? res.status(200).json({ message: 'Animals found', result })
+					? res.status(200).json(result)
 					: res.status(404).json({ error: 'Animals not found' })
 		)
 		.catch((error): Response<any> => res.status(404).json({ error }))

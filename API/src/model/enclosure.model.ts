@@ -1,5 +1,6 @@
 import { model, Schema } from 'mongoose'
-import { EnclosureInterface } from '../interface/enclosure.interface'
+
+import EnclosureInterface from '../interface/enclosure.interface'
 
 const EnclosureSchema = new Schema<EnclosureInterface>(
 	{
@@ -21,4 +22,4 @@ const EnclosureSchema = new Schema<EnclosureInterface>(
 
 const EnclosureModel = model<EnclosureInterface>('enclosure', EnclosureSchema)
 
-export { EnclosureModel, EnclosureInterface }
+export default EnclosureModel

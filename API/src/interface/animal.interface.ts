@@ -1,6 +1,6 @@
 import { Date, Document } from 'mongoose'
 
-interface AnimalInterface extends Document {
+export default interface AnimalInterface extends Document {
 	_id: string
 	name: string
 	specie: object
@@ -11,4 +11,3 @@ interface AnimalInterface extends Document {
 	position: number /* 0 (inside), 1 (outside), 2 (clinic) or 3 (loan) */
 }
 
-export { AnimalInterface }

@@ -1,41 +1,41 @@
 import express from 'express'
 import EnclosureController from '../controller/enclosure.controller'
-import LoggerMiddleware from '../middleware/logger.middleware'
+import Logger from '../middleware/log.middleware'
 
 const EnclosureRouter: express.Router = express.Router()
 
 // CREATE AN ENCLOSURE
 EnclosureRouter.post(
 	'/api/Enclosures/new',
-	LoggerMiddleware,
+	Logger,
 	EnclosureController.createEnclosure
 )
 
 // GET AN ENCLOSURE BY ID
 EnclosureRouter.get(
 	'/api/Enclosures/:id',
-	LoggerMiddleware,
+	Logger,
 	EnclosureController.getEnclosure
 )
 
 // UPDATE AN ENCLOSURE BY ID
 EnclosureRouter.put(
 	'/api/Enclosures/:id',
-	LoggerMiddleware,
+	Logger,
 	EnclosureController.updateEnclosure
 )
 
 // DELETE AN ENCLOSURE BY ID
 EnclosureRouter.delete(
 	'/api/Enclosures/:id',
-	LoggerMiddleware,
+	Logger,
 	EnclosureController.deleteEnclosure
 )
 
 // GET ALL ENCLOSURE
 EnclosureRouter.get(
 	'/api/enclosures/',
-	LoggerMiddleware,
+	Logger,
 	EnclosureController.getAllEnclosures
 )
 

@@ -1,0 +1,10 @@
+@import 'src/colors';
+
+html,
+body {
+	height: 100%;
+	background-color: $secondary-color;
+	color: $primary-color;
+	margin: 0;
+	font-family: Roboto, 'Helvetica Neue', sans-serif;
+}

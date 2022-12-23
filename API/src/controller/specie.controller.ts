@@ -1,6 +1,9 @@
 import { Request, Response, NextFunction } from 'express'
-import { AnimalModel } from '../model/animal.model'
-import { SpecieModel, SpecieInterface } from '../model/specie.model'
+
+import SpecieInterface from '../interface/specie.interface'
+import SpecieModel from '../model/specie.model'
+import AnimalModel from '../model/animal.model'
+
 import { urlToPosition, reversePosition } from '../utils/function'
 import logger from '../utils/logger'
 
@@ -20,7 +23,7 @@ const createSpecie = (
 	specie
 		.save()
 		.then((specie): void => {
-			res.status(201).json({ message: 'New specie registered', specie })
+			res.status(201).json(specie)
 		})
 		.catch((error): void => {
 			res.status(400).json({ error })
@@ -35,7 +38,7 @@ const createSpecie = (
  */
 const getSpecie = (req: Request, res: Response, next: NextFunction): void => {
 	SpecieModel.findById(req.params.id)
-		.populate({ path: 'enclosure', select: 'name zone' })
+		//.populate({ path: 'enclosure', select: 'name zone' })
 		.then(
 			(result): Response<any> =>
 				result
@@ -99,7 +102,7 @@ const getAllSpecies = (
 	next: NextFunction
 ): void => {
 	SpecieModel.find()
-		.populate({ path: 'enclosure', select: 'name zone' })
+		//.populate({ path: 'enclosure', select: 'name zone' })
 		.then(
 			(result): Response<any> =>
 				result

@@ -1,8 +1,11 @@
-import bcrypt from 'bcryptjs'
+import { Authentifaction } from './../middleware/auth.middleware'
 import { Request, Response, NextFunction } from 'express'
-import { EmployeeModel, EmployeeInterface } from '../model/employee.model'
+
+import EmployeeInterface from '../interface/employee.interface'
+import EmployeeModel from '../model/employee.model'
 
 import logger from '../utils/logger'
+import bcrypt from 'bcryptjs'
 
 /**
  *		REGISTER A NEW EMPLOYEE
@@ -50,6 +53,52 @@ const getEmployee = (req: Request, res: Response, next: NextFunction): void => {
 }
 
 /**
+ *		UPDATE AN EMPLOYEE
+ */
+const updateEmployee = (
+	req: Request,
+	res: Response,
+	next: NextFunction
+): void => {
+	EmployeeModel.findByIdAndUpdate(req.params.id, req.body)
+		.then(
+			(result): Response<any> =>
+				result
+					? res
+							.status(202)
+							.json({ message: 'Employee updated', result })
+					: res.status(404).json({ error: 'Employee not found' })
+		)
+		.catch((error): Response<any> => res.status(500).json({ error }))
+		.then((): void =>
+			logger.info(`[RES] code: ${res.statusCode} (${res.statusMessage})`)
+		)
+}
+
+/**
+ *		DELETE AN ANIMAL
+ */
+const deleteEmployee = (
+	req: Request,
+	res: Response,
+	next: NextFunction
+): void => {
+	EmployeeModel.findByIdAndDelete(req.params.id)
+		.then(
+			(result): Response<any> =>
+				result
+					? res
+							.status(410)
+							.json({ message: 'Employee deleted', result })
+					: res.status(404).json({ error: 'Employee not found' })
+		)
+		.catch((error): Response<any> => res.status(500).json({ error }))
+		.then((): void =>
+			logger.info(`[RES] code: ${res.statusCode} (${res.statusMessage})`)
+		)
+}
+
+/**
  *		GET ALL EMPLOYEES
  */
 const getAllEmployees = (
@@ -72,15 +121,14 @@ const getAllEmployees = (
 		)
 }
 
-const loginEmployee = (
-	req: Request,
-	res: Response,
-	next: NextFunction
-): void => {
+/**
+ *		LOGIN AN EMPLOYEE
+ */
+const loginEmployee = (req: Request, res: Response, next: NextFunction) => {
 	const { email, password } = req.body
 
 	EmployeeModel.findOne({ email: email })
-		.then((resultEmp): void => {
+		.then((resultEmp) => {
 			if (!resultEmp) {
 				res.status(404).json({
 					error: "Can't find employee, check email",
@@ -89,15 +137,18 @@ const loginEmployee = (
 				bcrypt.compare(
 					password,
 					resultEmp.passwordHash,
-					(error, resultCmp) => {
+					(error, resultCmp): void => {
 						if (!resultCmp) {
 							res.status(400).json({
 								error: "Can't login, check password",
 							})
 						} else {
+							const authToken: Promise<void> =
+								resultEmp.generateAuthTokenandSave()
 							res.status(200).json({
 								message: 'Login successfully',
 								resultEmp,
+								authToken,
 							})
 						}
 					}
@@ -113,9 +164,12 @@ const loginEmployee = (
 		)
 }
 
+
 export default {
 	registerEmployee,
 	getEmployee,
+	updateEmployee,
+	deleteEmployee,
 	getAllEmployees,
 	loginEmployee,
 }
