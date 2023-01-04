@@ -1,4 +1,4 @@
-import { Specie } from './../../species/models/specie.model'
+import { Specie } from 'src/app/species/models/specie.model'
 
 export class Animal {
 	_id!: string

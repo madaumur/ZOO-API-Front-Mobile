@@ -13,7 +13,7 @@ const routes: Routes = [
 			import('./species/species.module').then((m) => m.SpeciesModule),
 	},
 	// Pour n'importe qu'elle route non reconnue
-	//{ path: '**', redirectTo: 'animals' },
+	{ path: '**', redirectTo: 'animals' },
 ]
 
 @NgModule({

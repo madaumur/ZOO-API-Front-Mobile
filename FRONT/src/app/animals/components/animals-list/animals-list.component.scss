@@ -1,0 +1,26 @@
+@import 'src/colors';
+
+mat-card {
+	background-color: $darkgrey-accent;
+	box-shadow: $darkgrey-accent 3px 3px 7px;
+	padding: 30px;
+	position: relative;
+}
+
+button {
+	margin: 5px;
+}
+
+.loading {
+	align-self: center;
+}
+
+.form {
+	padding-top: 20px;
+	width: 80%;
+	align-self: center;
+
+	mat-form-field {
+		width: 100%;
+	}
+}

@@ -1,15 +1,32 @@
-<mat-card *ngIf="animals$ | async as animal">
-	<mat-card-header class="animal-header">
-		<mat-card-title>
-			name : {{ animal.name | uppercase }} ({{ animal.sex | uppercase }})
-		</mat-card-title>
-		<mat-card-subtitle>
-			specie : {{ animal.specie.name | titlecase }}
-		</mat-card-subtitle>
-	</mat-card-header>
-	<mat-divider></mat-divider>
-	<mat-card-content class="animal-content">
-		enclosure : {{ animal.specie.enclosure | titlecase }} <br />
-		actual pos: {{ animal.position }} <br /><br />
-	</mat-card-content>
+<mat-card>
+	<ng-container *ngIf="animal$ | async as animal">
+		<div>
+			<h1 matCardTitle>name : {{ animal.name }}</h1>
+			<h3 matCardSubtitle>specie : {{ animal.specie.name }}</h3>
+			<br />
+			<mat-nav-list class="general-info">
+				<h2 matListItemTitle>general info:</h2>
+				<span matListItemLine> gender: {{ animal.sex | gender }}</span>
+				<span matListItemLine>
+					position: {{ animal.position | position }}
+				</span>
+				<span matListItemLine>
+					enclosure: {{ animal.specie.enclosure }}
+				</span>
+			</mat-nav-list>
+		</div>
+	</ng-container>
+	<mat-card-actions class="loading">
+		<mat-spinner *ngIf="loading$ | async; else buttons"></mat-spinner>
+		<ng-template #buttons>
+			<div class="action-buttons">
+				<button mat-flat-button (click)="setOut()">Put OUT</button>
+				<button mat-flat-button (click)="setIn()">Put IN</button>
+				<!-- Sans mauais jeu de mots bien-sûr.. -->
+			</div>
+			<button mat-flat-button color="basic" (click)="onGoBack()">
+				RETURN
+			</button>
+		</ng-template>
+	</mat-card-actions>
 </mat-card>

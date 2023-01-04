@@ -1,5 +1,31 @@
-<h2>Animals list</h2>
-<app-animals-list-item
-	*ngFor="let animal of animals$ | async"
-	[animal]="animal"
-></app-animals-list-item>
+<mat-card>
+	<mat-card-title-group>
+		<mat-card-title>Animal list</mat-card-title>
+	</mat-card-title-group>
+
+	<div class="form">
+		<mat-form-field appearance="fill">
+			<input
+				matInput
+				type="text"
+				[formControl]="searchCtrl"
+				placeholder="search by name"
+			/>
+			<mat-icon matSuffix>search</mat-icon>
+		</mat-form-field>
+	</div>
+
+	<mat-spinner class="loading" *ngIf="loading$ | async"></mat-spinner>
+	<mat-nav-list *ngIf="animals$ | async as animals">
+		<a
+			mat-list-item
+			*ngFor="let animal of animals"
+			[routerLink]="animal._id"
+		>
+			<h3 matListItemTitle>{{ animal.name | uppercase }}</h3>
+			<p matListItemLine>
+				{{ animal.specie.name }}
+			</p>
+		</a>
+	</mat-nav-list>
+</mat-card>
