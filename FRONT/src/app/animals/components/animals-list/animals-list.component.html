@@ -1,6 +1,6 @@
 <mat-card>
 	<mat-card-title-group>
-		<mat-card-title>Animal list</mat-card-title>
+		<mat-card-title>ANIMAL LIST</mat-card-title>
 	</mat-card-title-group>
 
 	<div class="form">
@@ -9,7 +9,7 @@
 				matInput
 				type="text"
 				[formControl]="searchCtrl"
-				placeholder="search by name"
+				placeholder="search by name or specie"
 			/>
 			<mat-icon matSuffix>search</mat-icon>
 		</mat-form-field>
@@ -23,9 +23,7 @@
 			[routerLink]="animal._id"
 		>
 			<h3 matListItemTitle>{{ animal.name | uppercase }}</h3>
-			<p matListItemLine>
-				{{ animal.specie.name }}
-			</p>
+			<p matListItemLine>( {{ animal.specie.name }} )</p>
 		</a>
 	</mat-nav-list>
 </mat-card>

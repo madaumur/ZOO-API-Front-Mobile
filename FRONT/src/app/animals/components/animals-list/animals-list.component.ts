@@ -47,8 +47,12 @@ export class AnimalsListComponent implements OnInit {
 			this.animalService.animals$,
 		]).pipe(
 			map(([search, animals]: [string, Animal[]]): Animal[] =>
-				animals.filter((animal: Animal): boolean =>
-					animal.name.toLowerCase().includes(search as string)
+				animals.filter(
+					(animal: Animal): boolean =>
+						animal.name.toLowerCase().includes(search as string) ||
+						animal.specie.name
+							.toLowerCase()
+							.includes(search as string)
 				)
 			)
 		)
