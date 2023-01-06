@@ -1,4 +1,4 @@
-# ZOO API + Front + Mobile
+# ZOO API + Front
 
 # Backend
 
