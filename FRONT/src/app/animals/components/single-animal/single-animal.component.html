@@ -5,7 +5,7 @@
 			<h3 matCardSubtitle>specie : {{ animal.specie.name }}</h3>
 			<br />
 			<mat-nav-list class="general-info">
-				<h2 matListItemTitle>general info:</h2>
+				<h2 matListItemTitle><u>General info:</u></h2>
 				<span matListItemLine> gender: {{ animal.sex | gender }}</span>
 				<span matListItemLine>
 					position: {{ animal.position | position }}
@@ -20,8 +20,8 @@
 		<mat-spinner *ngIf="loading$ | async; else buttons"></mat-spinner>
 		<ng-template #buttons>
 			<div class="action-buttons">
-				<button mat-flat-button (click)="setOut()">Put OUT</button>
-				<button mat-flat-button (click)="setIn()">Put IN</button>
+				<button mat-flat-button (click)="setOut()">Take out!</button>
+				<button mat-flat-button (click)="setIn()">Bring in!</button>
 				<!-- Sans mauais jeu de mots bien-sûr.. -->
 			</div>
 			<button mat-flat-button color="basic" (click)="onGoBack()">

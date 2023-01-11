@@ -1,0 +1,14 @@
+<mat-card>
+	<mat-card-title-group>
+		<mat-card-title>USERS LIST</mat-card-title>
+	</mat-card-title-group>
+	<mat-spinner class="loading" *ngIf="loading$ | async"></mat-spinner>
+	<mat-nav-list *ngIf="users$ | async as users">
+		<span mat-list-item *ngFor="let user of users">
+			<h3 matListItemTitle>
+				{{ user.last_name | uppercase }}
+				{{ user.first_name | titlecase }}
+			</h3>
+		</span>
+	</mat-nav-list>
+</mat-card>

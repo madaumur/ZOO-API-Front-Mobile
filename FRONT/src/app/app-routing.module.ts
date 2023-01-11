@@ -12,6 +12,11 @@ const routes: Routes = [
 		loadChildren: () =>
 			import('./species/species.module').then((m) => m.SpeciesModule),
 	},
+	{
+		path: 'users',
+		loadChildren: () =>
+			import('./users/users.module').then((m) => m.UsersModule),
+	},
 	// Pour n'importe qu'elle route non reconnue
 	{ path: '**', redirectTo: 'animals' },
 ]

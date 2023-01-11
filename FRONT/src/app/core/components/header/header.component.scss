@@ -5,8 +5,13 @@ header {
 }
 
 ul {
-	list-style: none;
 	display: inline-block;
+	list-style: none;
+}
+
+.container {
+	display: inline-flex;
+	flex-wrap: wrap;
 }
 
 li {

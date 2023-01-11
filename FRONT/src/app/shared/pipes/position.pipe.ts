@@ -9,19 +9,19 @@ export class PositionPipe implements PipeTransform {
 
 		switch (value) {
 			case 0: {
-				position = 'enclosure-Inside'
+				position = 'enclosure-inside'
 				break
 			}
 			case 1: {
-				position = 'enclosure-Outside'
+				position = 'enclosure-outside'
 				break
 			}
 			case 2: {
-				position = 'Clinic'
+				position = 'clinic'
 				break
 			}
 			case 3: {
-				position = 'Loan'
+				position = 'loan'
 				break
 			}
 			default: {
