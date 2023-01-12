@@ -3,6 +3,13 @@
 		<mat-card-title>ANIMAL LIST</mat-card-title>
 	</mat-card-title-group>
 
+	<mat-progress-bar
+		mode="indeterminate"
+		color="accent"
+		class="loading"
+		*ngIf="loading$ | async"
+	></mat-progress-bar>
+
 	<div class="form">
 		<mat-form-field appearance="fill">
 			<input
@@ -14,8 +21,6 @@
 			<mat-icon matSuffix>search</mat-icon>
 		</mat-form-field>
 	</div>
-
-	<mat-spinner class="loading" *ngIf="loading$ | async"></mat-spinner>
 	<mat-nav-list *ngIf="animals$ | async as animals">
 		<a
 			mat-list-item

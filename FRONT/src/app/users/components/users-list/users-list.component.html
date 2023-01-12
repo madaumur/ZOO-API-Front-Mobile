@@ -2,7 +2,14 @@
 	<mat-card-title-group>
 		<mat-card-title>USERS LIST</mat-card-title>
 	</mat-card-title-group>
-	<mat-spinner class="loading" *ngIf="loading$ | async"></mat-spinner>
+
+	<mat-progress-bar
+		mode="indeterminate"
+		color="accent"
+		class="loading"
+		*ngIf="loading$ | async"
+	></mat-progress-bar>
+	<!-- <mat-spinner class="loading" *ngIf="loading$ | async"></mat-spinner> -->
 	<mat-nav-list *ngIf="users$ | async as users">
 		<span mat-list-item *ngFor="let user of users">
 			<h3 matListItemTitle>
